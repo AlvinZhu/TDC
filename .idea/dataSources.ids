@@ -1224,5 +1224,17 @@
       <column name="finish_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <primary-key name="PRIMARY" columns="task_id,procedure_id"/>
     </table>
+    <table name="TaskInfoOld" schema="" catalog="tdc" type="TABLE">
+      <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="procedure_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="work_hour" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
+      <column name="qualified" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
+      <column name="unqualified" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
+      <column name="status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <column name="start_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <column name="finish_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="task_id,procedure_id"/>
+    </table>
   </data-source>
 </component>

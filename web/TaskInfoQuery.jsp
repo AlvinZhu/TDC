@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alvin
@@ -11,7 +12,7 @@
     <title>工艺单查询</title>
 </head>
 <body>
-<s:form action="TaskInfo">
+<s:form action="TaskInfoQuery">
     <s:textfield name="taskId" key="taskId"/>
     <s:submit key="search"/>
 </s:form>

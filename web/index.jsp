@@ -12,9 +12,6 @@
     <title>主页</title>
 </head>
 <body>
-<s:form action="TaskInfo">
-    <s:textfield name="taskId" key="taskId"/>
-    <s:submit key="search"/>
-</s:form>
+<jsp:forward page="TaskInfoQuery.jsp"/>
 </body>
 </html>

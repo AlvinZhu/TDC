@@ -8,40 +8,72 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <title>查询结果</title>
+    <style type="text/css">
+        <!--
+        #left {
+            float: left;
+            height: auto;
+            width: auto;
+        }
+
+        #right {
+            float: left;
+            height: auto;
+            width: auto;
+        }
+
+        -->
+    </style>
+
 </head>
 <body>
 <%@include file="TaskInfoQuery.jsp" %>
-<s:form>
+<div id="left">
     <table>
         <tr>
             <td colspan="3">原工艺单</td>
-            <td colspan="3">新工艺单</td>
         </tr>
         <tr>
             <td>工序</td>
             <td>工序名称</td>
             <td>工时</td>
-            <td>工序</td>
-            <td>工序名称</td>
-            <td>工时</td>
         </tr>
-
-        <s:iterator value="pl" id="p" status="st">
+        <s:iterator value="resultListOld" id="p">
             <tr>
                 <td><s:property value="#p.procedureId"/></td>
                 <td><s:property value="#p.procedureName"/></td>
                 <td><s:property value="#p.workHour"/></td>
-                <td><s:textfield name="procedureId%{#st.index}" value="%{#p.procedureId}"/></td>
-                <td><s:textfield name="procedureName%{#st.index}" value="%{#p.procedureName}"/></td>
-                <td><s:textfield name="workHour%{#st.index}" value="%{#p.workHour}"/></td>
             </tr>
         </s:iterator>
     </table>
-    <s:submit key="update"/>
-</s:form>
-
-
+</div>
+<div id="right">
+    <s:form action="TaskInfoUpdate">
+        <s:hidden name="taskId" value="%{taskId}"/>
+        <table>
+            <tr>
+                <td colspan="3">新工艺单</td>
+            </tr>
+            <tr>
+                <td>工序</td>
+                <td>工序名称</td>
+                <td>工时</td>
+            </tr>
+            <s:iterator value="resultListNew" id="p2" status="st">
+                <!--s:hidden name="resultListNew[%{#st.index}].taskId" value="%{#p2.taskId}"/-->
+                <tr>
+                    <td><s:textfield name="resultListNew[%{#st.index}].procedureId" value="%{#p2.procedureId}"/></td>
+                    <td><s:textfield name="resultListNew[%{#st.index}].procedureName"
+                                     value="%{#p2.procedureName}"/></td>
+                    <td><s:textfield name="resultListNew[%{#st.index}].workHour" value="%{#p2.workHour}"/></td>
+                </tr>
+            </s:iterator>
+        </table>
+        <s:submit key="update"/>
+    </s:form>
+</div>
 </body>
 </html>
