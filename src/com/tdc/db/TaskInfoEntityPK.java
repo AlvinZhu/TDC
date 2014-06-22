@@ -3,7 +3,7 @@ package com.tdc.db;
 import java.io.Serializable;
 
 /**
- * Created by Alvin on 2014/6/19.
+ * Created by Alvin on 2014/6/20.
  */
 public class TaskInfoEntityPK implements Serializable {
     private String taskId;

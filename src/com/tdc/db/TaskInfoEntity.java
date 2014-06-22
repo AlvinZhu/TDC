@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- * Created by Alvin on 2014/6/19.
+ * Created by Alvin on 2014/6/20.
  */
 public class TaskInfoEntity {
     private String taskId;

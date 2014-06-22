@@ -3,6 +3,14 @@
          xmlns="http://xmlns.jcp.org/xml/ns/javaee"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
+    <servlet>
+        <servlet-name>TdcOutServlet</servlet-name>
+        <servlet-class>com.tdc.TdcOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TdcOutServlet</servlet-name>
+        <url-pattern>/TdcOut.servlet</url-pattern>
+    </servlet-mapping>
     <filter>
         <filter-name>struts2</filter-name>
         <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>

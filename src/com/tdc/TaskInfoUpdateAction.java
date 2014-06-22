@@ -1,5 +1,6 @@
 package com.tdc;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.TaskInfoEntity;
 import org.hibernate.Session;
@@ -30,6 +31,7 @@ public class TaskInfoUpdateAction extends ActionSupport {
         this.resultListNew = resultListNew;
     }
 
+
     @Override
     public String execute() throws Exception {
         if (resultListNew.size() != 0) {
@@ -43,13 +45,13 @@ public class TaskInfoUpdateAction extends ActionSupport {
             tx.commit();
 
             HibernateUtil.closeSession();
-            System.out.println(deletedEntities);
 
             sess = HibernateUtil.currentSession();
             tx = sess.beginTransaction();
 
-            for (int i = 0; i < 10; i++) {
+            for (int i = 9; i >= 0; i--) {
                 if (0 == resultListNew.get(i).getProcedureId()) {
+                    resultListNew.remove(i);
                     continue;
                 }
                 TaskInfoEntity task = new TaskInfoEntity();
@@ -57,15 +59,17 @@ public class TaskInfoUpdateAction extends ActionSupport {
                 task.setProcedureId(resultListNew.get(i).getProcedureId());
                 task.setProcedureName(resultListNew.get(i).getProcedureName());
                 task.setWorkHour(resultListNew.get(i).getWorkHour());
+
                 sess.save(task);
+
+
             }
             tx.commit();
 
             HibernateUtil.closeSession();
 
-            int pSize = resultListNew.size();
-            System.out.println(pSize);
-
+            ActionContext.getContext().getSession().put("list", resultListNew);
+            ActionContext.getContext().getSession().put("taskid", taskId);
             return SUCCESS;
         }
         return ERROR;
