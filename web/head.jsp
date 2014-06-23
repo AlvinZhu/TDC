@@ -17,9 +17,9 @@
         height: 28px;
         border: 1px #000 solid;
     }
-
 </style>
-<table class="stats">
+<div id=div0>
+    <table class="stats">
     <tr>
         <td><s:a href="ExcelImport.jsp"><s:text name="index.excelImport"/></s:a></td>
         <td><s:a href="TaskInfoQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
@@ -27,3 +27,4 @@
     </tr>
 </table>
 <hr/>
+</div>

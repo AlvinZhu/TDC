@@ -20,5 +20,13 @@
         <action name="FileUpload" class="com.tdc.FileUploadAction">
             <result name="success">ExcelImportSuccess.jsp</result>
         </action>
+        <action name="TdcOut" class="com.tdc.TdcOutAction">
+            <result name="success" type="stream">
+                <param name="contentType">image/jpeg</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">inline;filename=${fileName}</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
     </package>
 </struts>

@@ -1,12 +1,21 @@
 package com.tdc;
 
-import com.opensymphony.xwork2.ActionContext;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.EncodeHintType;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.TaskInfoMetaEntity;
+import org.apache.struts2.ServletActionContext;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.File;
+import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Alvin on 2014/6/19.
@@ -75,12 +84,19 @@ public class TaskInfoUpdateAction extends ActionSupport {
                 tx.commit();
 
                 HibernateUtil.closeSession();
+
+                String content = getTaskId() + "_" + getDrawingNum() + "_" + aResultListNew.getProcedureId() + "_" + aResultListNew.getProcedureName();
+                MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
+
+                Map hints = new HashMap();
+                hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+                BitMatrix bitMatrix = null;
+                bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 350, 350, hints);
+                Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "tdc" + aResultListNew.getProcedureId() + ".jpg").toPath();
+                MatrixToImageWriter.writeToPath(bitMatrix, "jpg", path);
+                //System.out.println(path);
             }
 
-
-            ActionContext.getContext().getSession().put("list", resultListNew);
-            ActionContext.getContext().getSession().put("taskid", taskId);
-            ActionContext.getContext().getSession().put("drawingnum", drawingNum);
             return SUCCESS;
         }
         return ERROR;
