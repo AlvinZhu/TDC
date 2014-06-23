@@ -17,6 +17,7 @@ public class TaskInfoEntity {
     private Integer status;
     private Timestamp startTime;
     private Timestamp finishTime;
+    private Integer drawingNum;
 
     public int getId() {
         return id;
@@ -133,5 +134,13 @@ public class TaskInfoEntity {
         result = 31 * result + (startTime != null ? startTime.hashCode() : 0);
         result = 31 * result + (finishTime != null ? finishTime.hashCode() : 0);
         return result;
+    }
+
+    public Integer getDrawingNum() {
+        return drawingNum;
+    }
+
+    public void setDrawingNum(Integer drawingNum) {
+        this.drawingNum = drawingNum;
     }
 }

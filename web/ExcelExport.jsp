@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: Alvin
@@ -8,10 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title><s:text name="query.query"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-ExcelExport.jsp
+<jsp:include page="ExcelExportBody.jsp"/>
 </body>
 </html>

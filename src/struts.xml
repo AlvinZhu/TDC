@@ -9,9 +9,13 @@
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.ui.theme" value="simple"/>
     <package name="tdc" extends="struts-default">
-        <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
+        <action name="TaskInfoMetaQuery" class="com.tdc.TaskInfoMetaQueryAction">
             <result name="error">/error.jsp</result>
             <result name="success">/TaskInfoUpdate.jsp</result>
+        </action>
+        <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
+            <result name="error">/error.jsp</result>
+            <result name="success">/ExcelExportSuccess.jsp</result>
         </action>
         <action name="TaskInfoUpdate" class="com.tdc.TaskInfoUpdateAction">
             <result name="error">/error.jsp</result>

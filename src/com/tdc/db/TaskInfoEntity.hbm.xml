@@ -11,6 +11,9 @@
         <property name="taskId">
             <column name="task_id" sql-type="varchar" length="30"/>
         </property>
+        <property name="drawingNum">
+            <column name="drawing_num" sql-type="int"/>
+        </property>
         <property name="procedureId">
             <column name="procedure_id" sql-type="int"/>
         </property>
