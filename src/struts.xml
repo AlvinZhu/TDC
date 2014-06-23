@@ -10,12 +10,15 @@
     <constant name="struts.ui.theme" value="simple"/>
     <package name="tdc" extends="struts-default">
         <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
-        <result name="error">/error.jsp</result>
+            <result name="error">/error.jsp</result>
             <result name="success">/TaskInfoUpdate.jsp</result>
         </action>
         <action name="TaskInfoUpdate" class="com.tdc.TaskInfoUpdateAction">
             <result name="error">/error.jsp</result>
             <result name="success">/TaskInfoPrint.jsp</result>
+        </action>
+        <action name="FileUpload" class="com.tdc.FileUploadAction">
+            <result name="success">ExcelImportSuccess.jsp</result>
         </action>
     </package>
 </struts>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="com.tdc.db.OrderEntity" table="order" schema="" catalog="tdc">
+        <id name="id">
+            <column name="id" sql-type="int" not-null="true"/>
+        </id>
+        <property name="processRegion">
+            <column name="process_region" sql-type="varchar"/>
+        </property>
+        <property name="annualPlan">
+            <column name="annual_plan" sql-type="varchar"/>
+        </property>
+        <property name="monthlyPlan">
+            <column name="monthly_plan" sql-type="varchar"/>
+        </property>
+        <property name="plansetTags">
+            <column name="planset_tags" sql-type="varchar"/>
+        </property>
+        <property name="planEndTime">
+            <column name="plan_end_time" sql-type="varchar"/>
+        </property>
+        <property name="trialEndTime">
+            <column name="trial_end_time" sql-type="varchar"/>
+        </property>
+        <property name="taskId1">
+            <column name="task_id1" sql-type="varchar"/>
+        </property>
+        <property name="taskId2">
+            <column name="task_id2" sql-type="varchar"/>
+        </property>
+        <property name="taskId">
+            <column name="task_id" sql-type="varchar"/>
+        </property>
+        <property name="drawingNum">
+            <column name="drawing_num" sql-type="int"/>
+        </property>
+        <property name="drawingName">
+            <column name="drawing_name" sql-type="varchar"/>
+        </property>
+        <property name="drawingId">
+            <column name="drawing_id" sql-type="varchar"/>
+        </property>
+        <property name="num">
+            <column name="num" sql-type="int"/>
+        </property>
+        <property name="procedureId">
+            <column name="procedure_id" sql-type="int"/>
+        </property>
+        <property name="procedureName">
+            <column name="procedure_name" sql-type="varchar"/>
+        </property>
+        <property name="workHour">
+            <column name="work_hour" sql-type="decimal" precision="10" scale="1"/>
+        </property>
+        <property name="taskTime">
+            <column name="task_time" sql-type="varchar"/>
+        </property>
+        <property name="receiveTime">
+            <column name="receive_time" sql-type="varchar"/>
+        </property>
+        <property name="epiboleStatus">
+            <column name="epibole_status" sql-type="varchar"/>
+        </property>
+        <property name="epiboleCheckTime">
+            <column name="epibole_check_time" sql-type="varchar"/>
+        </property>
+        <property name="epiboleFactory">
+            <column name="epibole_factory" sql-type="varchar"/>
+        </property>
+        <property name="taskType">
+            <column name="task_type" sql-type="varchar"/>
+        </property>
+        <property name="applicant">
+            <column name="applicant" sql-type="varchar"/>
+        </property>
+        <property name="epiboleEndTime">
+            <column name="epibole_end_time" sql-type="varchar"/>
+        </property>
+        <property name="planType">
+            <column name="plan_type" sql-type="varchar"/>
+        </property>
+    </class>
+</hibernate-mapping>

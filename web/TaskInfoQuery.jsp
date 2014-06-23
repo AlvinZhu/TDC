@@ -9,12 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>工艺单查询</title>
+    <title><s:text name="query.title"/></title>
 </head>
 <body>
-<s:form action="TaskInfoQuery">
-    <s:textfield name="taskId" key="taskId"/>
-    <s:submit key="search"/>
-</s:form>
+<jsp:include page="head.jsp"/>
+<jsp:include page="TaskInfoQueryBody.jsp"/>
 </body>
 </html>

@@ -6,7 +6,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
-import com.tdc.db.TaskInfoEntity;
+import com.tdc.db.TaskInfoMetaEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -29,15 +29,17 @@ public class TdcOutServlet extends HttpServlet {
         String pid = requset.getParameter("pid");
         String content = null;
         HttpSession session = requset.getSession();
-        List<TaskInfoEntity> list = (List<TaskInfoEntity>) session.getAttribute("list");
+        List<TaskInfoMetaEntity> list = (List<TaskInfoMetaEntity>) session.getAttribute("list");
         String taskId = (String) session.getAttribute("taskid");
+        String drawingNum = (String) session.getAttribute("drawingnum");
 
         for (int i = 0; i < list.size(); i++) {
             if (Integer.parseInt(pid) == list.get(i).getProcedureId()) {
-                content = taskId + "_" + list.get(i).getProcedureId() + "_" + list.get(i).getProcedureName();
+                content = taskId + "_" + drawingNum + "_" + list.get(i).getProcedureId() + "_" + list.get(i).getProcedureName();
                 break;
             }
         }
+        System.out.println(content);
         MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
 
         Map hints = new HashMap();

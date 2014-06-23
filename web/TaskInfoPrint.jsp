@@ -13,12 +13,12 @@
     <title>打印</title>
 </head>
 <body>
-
-<table>
+<jsp:include page="head.jsp"/>
+<table class="stats">
     <tr>
         <td colspan="2">新工艺单</td>
-        <td colspan="1">taskId:</td>
-        <td colspan="1"><s:property value="%{taskId}"/></td>
+        <td colspan="1"><s:text name="print.taskId"/><s:property value="%{taskId}"/></td>
+        <td colspan="1"><s:text name="print.drawingNum"/><s:property value="%{drawingNum}"/></td>
     </tr>
     <tr>
         <td>工序</td>
@@ -28,11 +28,13 @@
     </tr>
     <s:iterator value="resultListNew" id="p2" status="st">
         <tr>
+            <s:if test='%{#p2.procedureName!=""}'>
             <td><s:property value="#p2.procedureId"/></td>
             <td><s:property value="#p2.procedureName"/></td>
             <td><s:property value="#p2.workHour"/></td>
-            <td><img style="height:350px;width:350px" src="<s:url value="TdcOut.servlet?pid=%{#p2.procedureId}"/>"/>
-            </td>
+                <td><img style="height:100px;width:100px" src="<s:url value="TdcOut.servlet?pid=%{#p2.procedureId}"/>"/>
+                </td>
+            </s:if>
         </tr>
     </s:iterator>
 </table>

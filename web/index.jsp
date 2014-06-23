@@ -9,9 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>主页</title>
+    <title><s:text name="index.title"/></title>
 </head>
 <body>
-<jsp:forward page="TaskInfoQuery.jsp"/>
+<jsp:include page="head.jsp"/>
+Welcome！
 </body>
 </html>

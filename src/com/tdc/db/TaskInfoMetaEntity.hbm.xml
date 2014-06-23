@@ -4,12 +4,15 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="com.tdc.db.TaskInfoEntity" table="TaskInfo" schema="" catalog="tdc">
+    <class name="com.tdc.db.TaskInfoMetaEntity" table="TaskInfoMeta" schema="" catalog="tdc">
         <id name="id">
             <column name="id" sql-type="int" not-null="true"/>
         </id>
         <property name="taskId">
             <column name="task_id" sql-type="varchar" length="30"/>
+        </property>
+        <property name="drawingNum">
+            <column name="drawing_num" sql-type="int"/>
         </property>
         <property name="procedureId">
             <column name="procedure_id" sql-type="int"/>
@@ -19,21 +22,6 @@
         </property>
         <property name="workHour">
             <column name="work_hour" sql-type="decimal" precision="10" scale="1"/>
-        </property>
-        <property name="qualified">
-            <column name="qualified" sql-type="decimal" precision="10" scale="1"/>
-        </property>
-        <property name="unqualified">
-            <column name="unqualified" sql-type="decimal" precision="10" scale="1"/>
-        </property>
-        <property name="status">
-            <column name="status" sql-type="int"/>
-        </property>
-        <property name="startTime">
-            <column name="start_time" sql-type="datetime"/>
-        </property>
-        <property name="finishTime">
-            <column name="finish_time" sql-type="datetime"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -10,7 +10,7 @@
 <html>
 
 <head>
-    <title>查询结果</title>
+    <title><s:text name="update.title"/></title>
     <style type="text/css">
         <!--
         #left {
@@ -24,16 +24,16 @@
             height: auto;
             width: auto;
         }
-
         -->
     </style>
 
 </head>
 <body>
-<%@include file="TaskInfoQuery.jsp" %>
+<jsp:include page="head.jsp"/>
+<jsp:include page="TaskInfoQueryBody.jsp"/>
 <div id="left">
-    <table>
-        <tr>
+    <table class="stats">
+    <tr>
             <td colspan="3">原工艺单</td>
         </tr>
         <tr>
@@ -53,8 +53,9 @@
 <div id="right">
     <s:form action="TaskInfoUpdate">
         <s:hidden name="taskId" value="%{taskId}"/>
-        <table>
-            <tr>
+        <s:hidden name="drawingNum" value="%{drawingNum}"/>
+        <table class="stats">
+        <tr>
                 <td colspan="3">新工艺单</td>
             </tr>
             <tr>
@@ -63,7 +64,6 @@
                 <td>工时</td>
             </tr>
             <s:iterator value="resultListNew" id="p2" status="st">
-                <!--s:hidden name="resultListNew[%{#st.index}].taskId" value="%{#p2.taskId}"/-->
                 <tr>
                     <td><s:textfield name="resultListNew[%{#st.index}].procedureId" value="%{#p2.procedureId}"/></td>
                     <td><s:textfield name="resultListNew[%{#st.index}].procedureName"
@@ -72,7 +72,7 @@
                 </tr>
             </s:iterator>
         </table>
-        <s:submit key="update"/>
+        <s:submit key="query.update"/>
     </s:form>
 </div>
 </body>

@@ -2,7 +2,7 @@ package com.tdc;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
-import com.tdc.db.TaskInfoEntity;
+import com.tdc.db.TaskInfoMetaEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -13,7 +13,8 @@ import java.util.List;
  */
 public class TaskInfoUpdateAction extends ActionSupport {
     private String taskId;
-    private List<TaskInfoEntity> resultListNew;
+    private List<TaskInfoMetaEntity> resultListNew;
+    private String drawingNum;
 
     public String getTaskId() {
         return taskId;
@@ -23,11 +24,11 @@ public class TaskInfoUpdateAction extends ActionSupport {
         this.taskId = taskId;
     }
 
-    public List<TaskInfoEntity> getResultListNew() {
+    public List<TaskInfoMetaEntity> getResultListNew() {
         return resultListNew;
     }
 
-    public void setResultListNew(List<TaskInfoEntity> resultListNew) {
+    public void setResultListNew(List<TaskInfoMetaEntity> resultListNew) {
         this.resultListNew = resultListNew;
     }
 
@@ -39,39 +40,57 @@ public class TaskInfoUpdateAction extends ActionSupport {
 
             Transaction tx = sess.beginTransaction();
 
-            int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.taskId=:id")
+            int deletedEntities = sess.createQuery("delete from TaskInfoMetaEntity as task where task.taskId=:id and task.drawingNum=:num")
                     .setString("id", getTaskId())
+                    .setString("num", getDrawingNum())
                     .executeUpdate();
             tx.commit();
 
             HibernateUtil.closeSession();
 
-            sess = HibernateUtil.currentSession();
-            tx = sess.beginTransaction();
 
-            for (int i = 9; i >= 0; i--) {
-                if (0 == resultListNew.get(i).getProcedureId()) {
-                    resultListNew.remove(i);
+            for (int i = 0; i < 12; i++) {
+                Integer id = resultListNew.get(i).getProcedureId();
+                while ((null != id) && (i + 1 != id)) {
+                    TaskInfoMetaEntity task = resultListNew.set(id - 1, resultListNew.get(i));
+                    resultListNew.set(i, task);
+                    id = resultListNew.get(i).getProcedureId();
+                }
+                //resultListNew.get(i).setProcedureId(i);
+            }
+
+            //TaskInfoMetaComparator comparator=new TaskInfoMetaComparator();
+            //Collections.sort(resultListNew, comparator);
+
+            for (TaskInfoMetaEntity aResultListNew : resultListNew) {
+                if (aResultListNew.getProcedureName().equals("")) {
                     continue;
                 }
-                TaskInfoEntity task = new TaskInfoEntity();
-                task.setTaskId(getTaskId());
-                task.setProcedureId(resultListNew.get(i).getProcedureId());
-                task.setProcedureName(resultListNew.get(i).getProcedureName());
-                task.setWorkHour(resultListNew.get(i).getWorkHour());
+                sess = HibernateUtil.currentSession();
+                tx = sess.beginTransaction();
+                aResultListNew.setTaskId(getTaskId());
+                aResultListNew.setDrawingNum(Integer.parseInt(getDrawingNum()));
 
-                sess.save(task);
+                sess.save(aResultListNew);
+                tx.commit();
 
-
+                HibernateUtil.closeSession();
             }
-            tx.commit();
 
-            HibernateUtil.closeSession();
 
             ActionContext.getContext().getSession().put("list", resultListNew);
             ActionContext.getContext().getSession().put("taskid", taskId);
+            ActionContext.getContext().getSession().put("drawingnum", drawingNum);
             return SUCCESS;
         }
         return ERROR;
+    }
+
+    public String getDrawingNum() {
+        return drawingNum;
+    }
+
+    public void setDrawingNum(String drawingNum) {
+        this.drawingNum = drawingNum;
     }
 }
