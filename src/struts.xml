@@ -22,7 +22,11 @@
             <result name="success">/TaskInfoPrint.jsp</result>
         </action>
         <action name="FileUpload" class="com.tdc.FileUploadAction">
-            <result name="success">ExcelImportSuccess.jsp</result>
+            <result name="success">/ExcelImportSuccess.jsp</result>
+        </action>
+        <action name="Log" class="com.tdc.LogAction">
+            <result name="error">/LogFaild.jsp</result>
+            <result name="success">/LogSuccess.jsp</result>
         </action>
         <action name="TdcOut" class="com.tdc.TdcOutAction">
             <result name="success" type="stream">

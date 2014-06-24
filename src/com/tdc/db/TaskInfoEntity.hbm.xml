@@ -38,5 +38,11 @@
         <property name="finishTime">
             <column name="finish_time" sql-type="datetime"/>
         </property>
+        <property name="workerId">
+            <column name="worker_id" sql-type="varchar" length="30"/>
+        </property>
+        <property name="deviceId">
+            <column name="device_id" sql-type="varchar" length="30"/>
+        </property>
     </class>
 </hibernate-mapping>

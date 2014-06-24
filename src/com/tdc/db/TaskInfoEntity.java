@@ -18,6 +18,8 @@ public class TaskInfoEntity {
     private Timestamp startTime;
     private Timestamp finishTime;
     private Integer drawingNum;
+    private String workerId;
+    private String deviceId;
 
     public int getId() {
         return id;
@@ -142,5 +144,21 @@ public class TaskInfoEntity {
 
     public void setDrawingNum(Integer drawingNum) {
         this.drawingNum = drawingNum;
+    }
+
+    public String getWorkerId() {
+        return workerId;
+    }
+
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
+    }
+
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 }
