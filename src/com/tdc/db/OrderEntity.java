@@ -1,45 +1,38 @@
 package com.tdc.db;
 
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
- * Created by Alvin on 2014/6/22.
+ * Created by Alvin on 2014/7/2.
  */
 public class OrderEntity {
-    private int id;
     private String processRegion;
     private String annualPlan;
     private String monthlyPlan;
     private String plansetTags;
-    private String planEndTime;
+    private Date planEndTime;
     private String trialEndTime;
     private String taskId1;
     private String taskId2;
     private String taskId;
-    private Integer drawingNum;
+    private int drawingNum;
     private String drawingName;
     private String drawingId;
     private Integer num;
-    private Integer procedureId;
+    private int procedureId;
     private String procedureName;
     private BigDecimal workHour;
     private String taskTime;
-    private String receiveTime;
+    private Timestamp receiveTime;
     private String epiboleStatus;
     private String epiboleCheckTime;
     private String epiboleFactory;
     private String taskType;
     private String applicant;
-    private String epiboleEndTime;
+    private Date epiboleEndTime;
     private String planType;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getProcessRegion() {
         return processRegion;
@@ -73,11 +66,11 @@ public class OrderEntity {
         this.plansetTags = plansetTags;
     }
 
-    public String getPlanEndTime() {
+    public Date getPlanEndTime() {
         return planEndTime;
     }
 
-    public void setPlanEndTime(String planEndTime) {
+    public void setPlanEndTime(Date planEndTime) {
         this.planEndTime = planEndTime;
     }
 
@@ -113,11 +106,11 @@ public class OrderEntity {
         this.taskId = taskId;
     }
 
-    public Integer getDrawingNum() {
+    public int getDrawingNum() {
         return drawingNum;
     }
 
-    public void setDrawingNum(Integer drawingNum) {
+    public void setDrawingNum(int drawingNum) {
         this.drawingNum = drawingNum;
     }
 
@@ -145,11 +138,11 @@ public class OrderEntity {
         this.num = num;
     }
 
-    public Integer getProcedureId() {
+    public int getProcedureId() {
         return procedureId;
     }
 
-    public void setProcedureId(Integer procedureId) {
+    public void setProcedureId(int procedureId) {
         this.procedureId = procedureId;
     }
 
@@ -177,11 +170,11 @@ public class OrderEntity {
         this.taskTime = taskTime;
     }
 
-    public String getReceiveTime() {
+    public Timestamp getReceiveTime() {
         return receiveTime;
     }
 
-    public void setReceiveTime(String receiveTime) {
+    public void setReceiveTime(Timestamp receiveTime) {
         this.receiveTime = receiveTime;
     }
 
@@ -225,11 +218,11 @@ public class OrderEntity {
         this.applicant = applicant;
     }
 
-    public String getEpiboleEndTime() {
+    public Date getEpiboleEndTime() {
         return epiboleEndTime;
     }
 
-    public void setEpiboleEndTime(String epiboleEndTime) {
+    public void setEpiboleEndTime(Date epiboleEndTime) {
         this.epiboleEndTime = epiboleEndTime;
     }
 
@@ -248,12 +241,12 @@ public class OrderEntity {
 
         OrderEntity that = (OrderEntity) o;
 
-        if (id != that.id) return false;
+        if (drawingNum != that.drawingNum) return false;
+        if (procedureId != that.procedureId) return false;
         if (annualPlan != null ? !annualPlan.equals(that.annualPlan) : that.annualPlan != null) return false;
         if (applicant != null ? !applicant.equals(that.applicant) : that.applicant != null) return false;
         if (drawingId != null ? !drawingId.equals(that.drawingId) : that.drawingId != null) return false;
         if (drawingName != null ? !drawingName.equals(that.drawingName) : that.drawingName != null) return false;
-        if (drawingNum != null ? !drawingNum.equals(that.drawingNum) : that.drawingNum != null) return false;
         if (epiboleCheckTime != null ? !epiboleCheckTime.equals(that.epiboleCheckTime) : that.epiboleCheckTime != null)
             return false;
         if (epiboleEndTime != null ? !epiboleEndTime.equals(that.epiboleEndTime) : that.epiboleEndTime != null)
@@ -267,7 +260,6 @@ public class OrderEntity {
         if (planEndTime != null ? !planEndTime.equals(that.planEndTime) : that.planEndTime != null) return false;
         if (planType != null ? !planType.equals(that.planType) : that.planType != null) return false;
         if (plansetTags != null ? !plansetTags.equals(that.plansetTags) : that.plansetTags != null) return false;
-        if (procedureId != null ? !procedureId.equals(that.procedureId) : that.procedureId != null) return false;
         if (procedureName != null ? !procedureName.equals(that.procedureName) : that.procedureName != null)
             return false;
         if (processRegion != null ? !processRegion.equals(that.processRegion) : that.processRegion != null)
@@ -286,8 +278,7 @@ public class OrderEntity {
 
     @Override
     public int hashCode() {
-        int result = id;
-        result = 31 * result + (processRegion != null ? processRegion.hashCode() : 0);
+        int result = processRegion != null ? processRegion.hashCode() : 0;
         result = 31 * result + (annualPlan != null ? annualPlan.hashCode() : 0);
         result = 31 * result + (monthlyPlan != null ? monthlyPlan.hashCode() : 0);
         result = 31 * result + (plansetTags != null ? plansetTags.hashCode() : 0);
@@ -296,11 +287,11 @@ public class OrderEntity {
         result = 31 * result + (taskId1 != null ? taskId1.hashCode() : 0);
         result = 31 * result + (taskId2 != null ? taskId2.hashCode() : 0);
         result = 31 * result + (taskId != null ? taskId.hashCode() : 0);
-        result = 31 * result + (drawingNum != null ? drawingNum.hashCode() : 0);
+        result = 31 * result + drawingNum;
         result = 31 * result + (drawingName != null ? drawingName.hashCode() : 0);
         result = 31 * result + (drawingId != null ? drawingId.hashCode() : 0);
         result = 31 * result + (num != null ? num.hashCode() : 0);
-        result = 31 * result + (procedureId != null ? procedureId.hashCode() : 0);
+        result = 31 * result + procedureId;
         result = 31 * result + (procedureName != null ? procedureName.hashCode() : 0);
         result = 31 * result + (workHour != null ? workHour.hashCode() : 0);
         result = 31 * result + (taskTime != null ? taskTime.hashCode() : 0);

@@ -21,8 +21,16 @@
             <result name="error">/error.jsp</result>
             <result name="success">/TaskInfoPrint.jsp</result>
         </action>
-        <action name="FileUpload" class="com.tdc.FileUploadAction">
-            <result name="success">/ExcelImportSuccess.jsp</result>
+        <action name="OrderImport" class="com.tdc.OrderImportAction">
+            <result name="success">/OrderImportSuccess.jsp</result>
+            <result name="error">/error.jsp</result>
+        </action>
+        <action name="Order" class="com.tdc.OrderAction">
+            <result name="error">/error.jsp</result>
+            <result name="insert">/OrderQueryResult.jsp</result>
+            <result name="query">/OrderQueryResult.jsp</result>
+            <result name="update">/OrderQueryResult.jsp</result>
+            <result name="delete">/OrderQueryResult.jsp</result>
         </action>
         <action name="Log" class="com.tdc.LogAction">
             <result name="error">/LogFaild.jsp</result>

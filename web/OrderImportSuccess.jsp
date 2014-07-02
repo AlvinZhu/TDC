@@ -9,23 +9,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title><s:text name="order.title"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
+<jsp:include page="OrderQueryBody.jsp"/>
+<s:text name="import.success"/>
+<br/>
+<s:text name="import.filename"/>
 <s:property value="filename"/>
-<hr/>
+<br/>
+<s:text name="import.fileType"/>
 <s:property value="contentType"/>
-<table>
-    <s:iterator value="list" id="p2" status="st">
-        <tr>
-            <td><s:property value="#p2.taskId"/></td>
-            <td><s:property value="#p2.procedureId"/></td>
-            <td><s:property value="#p2.procedureName"/></td>
-            <td><s:property value="#p2.workHour"/></td>
-            </td>
-        </tr>
-    </s:iterator>
-</table>
+<br/>
+<s:text name="import.count"/>
+<s:property value="%{list.size()}"/>
+
 </body>
 </html>

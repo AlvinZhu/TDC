@@ -1,7 +1,5 @@
 package com.tdc.xls;
 
-import java.math.BigDecimal;
-
 /**
  * Created by Alvin on 2014/6/22.
  */
@@ -15,13 +13,13 @@ public class XlsEntity {
     private String taskId1;
     private String taskId2;
     private String taskId;
-    private Integer drawingNum;
+    private String drawingNum;
     private String drawingName;
     private String drawingId;
-    private Integer num;
-    private Integer procedureId;
+    private String num;
+    private String procedureId;
     private String procedureName;
-    private BigDecimal workHour;
+    private String workHour;
     private String taskTime;
     private String receiveTime;
     private String epiboleStatus;
@@ -104,11 +102,11 @@ public class XlsEntity {
         this.taskId = taskId;
     }
 
-    public Integer getDrawingNum() {
+    public String getDrawingNum() {
         return drawingNum;
     }
 
-    public void setDrawingNum(Integer drawingNum) {
+    public void setDrawingNum(String drawingNum) {
         this.drawingNum = drawingNum;
     }
 
@@ -128,19 +126,19 @@ public class XlsEntity {
         this.drawingId = drawingId;
     }
 
-    public Integer getNum() {
+    public String getNum() {
         return num;
     }
 
-    public void setNum(Integer num) {
+    public void setNum(String num) {
         this.num = num;
     }
 
-    public Integer getProcedureId() {
+    public String getProcedureId() {
         return procedureId;
     }
 
-    public void setProcedureId(Integer procedureId) {
+    public void setProcedureId(String procedureId) {
         this.procedureId = procedureId;
     }
 
@@ -152,11 +150,11 @@ public class XlsEntity {
         this.procedureName = procedureName;
     }
 
-    public BigDecimal getWorkHour() {
+    public String getWorkHour() {
         return workHour;
     }
 
-    public void setWorkHour(BigDecimal workHour) {
+    public void setWorkHour(String workHour) {
         this.workHour = workHour;
     }
 
@@ -230,47 +228,5 @@ public class XlsEntity {
 
     public void setPlanType(String planType) {
         this.planType = planType;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        XlsEntity that = (XlsEntity) o;
-
-        if (annualPlan != null ? !annualPlan.equals(that.annualPlan) : that.annualPlan != null) return false;
-        if (applicant != null ? !applicant.equals(that.applicant) : that.applicant != null) return false;
-        if (drawingId != null ? !drawingId.equals(that.drawingId) : that.drawingId != null) return false;
-        if (drawingName != null ? !drawingName.equals(that.drawingName) : that.drawingName != null) return false;
-        if (drawingNum != null ? !drawingNum.equals(that.drawingNum) : that.drawingNum != null) return false;
-        if (epiboleCheckTime != null ? !epiboleCheckTime.equals(that.epiboleCheckTime) : that.epiboleCheckTime != null)
-            return false;
-        if (epiboleEndTime != null ? !epiboleEndTime.equals(that.epiboleEndTime) : that.epiboleEndTime != null)
-            return false;
-        if (epiboleFactory != null ? !epiboleFactory.equals(that.epiboleFactory) : that.epiboleFactory != null)
-            return false;
-        if (epiboleStatus != null ? !epiboleStatus.equals(that.epiboleStatus) : that.epiboleStatus != null)
-            return false;
-        if (monthlyPlan != null ? !monthlyPlan.equals(that.monthlyPlan) : that.monthlyPlan != null) return false;
-        if (num != null ? !num.equals(that.num) : that.num != null) return false;
-        if (planEndTime != null ? !planEndTime.equals(that.planEndTime) : that.planEndTime != null) return false;
-        if (planType != null ? !planType.equals(that.planType) : that.planType != null) return false;
-        if (plansetTags != null ? !plansetTags.equals(that.plansetTags) : that.plansetTags != null) return false;
-        if (procedureId != null ? !procedureId.equals(that.procedureId) : that.procedureId != null) return false;
-        if (procedureName != null ? !procedureName.equals(that.procedureName) : that.procedureName != null)
-            return false;
-        if (processRegion != null ? !processRegion.equals(that.processRegion) : that.processRegion != null)
-            return false;
-        if (receiveTime != null ? !receiveTime.equals(that.receiveTime) : that.receiveTime != null) return false;
-        if (taskId != null ? !taskId.equals(that.taskId) : that.taskId != null) return false;
-        if (taskId1 != null ? !taskId1.equals(that.taskId1) : that.taskId1 != null) return false;
-        if (taskId2 != null ? !taskId2.equals(that.taskId2) : that.taskId2 != null) return false;
-        if (taskTime != null ? !taskTime.equals(that.taskTime) : that.taskTime != null) return false;
-        if (taskType != null ? !taskType.equals(that.taskType) : that.taskType != null) return false;
-        if (trialEndTime != null ? !trialEndTime.equals(that.trialEndTime) : that.trialEndTime != null) return false;
-        if (workHour != null ? !workHour.equals(that.workHour) : that.workHour != null) return false;
-
-        return true;
     }
 }

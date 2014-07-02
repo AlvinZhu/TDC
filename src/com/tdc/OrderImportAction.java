@@ -7,6 +7,7 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -15,19 +16,21 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Alvin on 2014/6/22.
  */
-public class FileUploadAction extends ActionSupport {
+public class OrderImportAction extends ActionSupport {
     private String contentType;
     private String filename;
-    private File upload;
+    private File file;
     private List<XlsEntity> list;
 
-    public void setUploadContentType(String contentType) {
+    public void setFileContentType(String contentType) {
         this.contentType = contentType;
     }
 
@@ -35,7 +38,7 @@ public class FileUploadAction extends ActionSupport {
         return contentType;
     }
 
-    public void setUploadFileName(String filename) {
+    public void setFileFileName(String filename) {
         this.filename = filename;
     }
 
@@ -43,12 +46,12 @@ public class FileUploadAction extends ActionSupport {
         return filename;
     }
 
-    public File getUpload() {
-        return upload;
+    public File getFile() {
+        return file;
     }
 
-    public void setUpload(File upload) {
-        this.upload = upload;
+    public void setFile(File file) {
+        this.file = file;
     }
 
     public List<XlsEntity> getList() {
@@ -59,21 +62,35 @@ public class FileUploadAction extends ActionSupport {
         this.list = list;
     }
 
+    private String getValue(HSSFCell hssfCell) {
+        if (null == hssfCell) {
+            return "";
+        } else if (hssfCell.getCellType() == Cell.CELL_TYPE_BOOLEAN) {
+            return String.valueOf(hssfCell.getBooleanCellValue());
+        } else if (hssfCell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
+            return String.valueOf(hssfCell.getNumericCellValue());
+        } else if (hssfCell.getCellType() == Cell.CELL_TYPE_STRING) {
+            return String.valueOf(hssfCell.getStringCellValue());
+        } else {
+            return "";
+        }
+    }
+    
     private List<XlsEntity> readXls() throws IOException {
-        InputStream is;
+        InputStream inputStream;
         HSSFWorkbook hssfWorkbook;
-        XlsEntity xlsDto;
+        XlsEntity xlsEntity;
         HSSFSheet hssfSheet;
         HSSFRow hssfRow;
         HSSFCell hssfCell;
         List<XlsEntity> list;
 
-        if (null == upload) {
+        if (null == file) {
             return null;
         }
 
-        is = new FileInputStream(upload);
-        hssfWorkbook = new HSSFWorkbook(is);
+        inputStream = new FileInputStream(file);
+        hssfWorkbook = new HSSFWorkbook(inputStream);
         list = new ArrayList<XlsEntity>();
         // 循环工作表Sheet
         for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
@@ -87,114 +104,96 @@ public class FileUploadAction extends ActionSupport {
                 if (hssfRow == null) {
                     continue;
                 }
-                xlsDto = new XlsEntity();
+                xlsEntity = new XlsEntity();
 
                 hssfCell = hssfRow.getCell(0);
-                xlsDto.setProcessRegion(getValue(hssfCell));
+                xlsEntity.setProcessRegion(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(1);
-                xlsDto.setAnnualPlan(getValue(hssfCell));
+                xlsEntity.setAnnualPlan(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(2);
-                xlsDto.setMonthlyPlan(getValue(hssfCell));
+                xlsEntity.setMonthlyPlan(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(3);
-                xlsDto.setPlansetTags(getValue(hssfCell));
+                xlsEntity.setPlansetTags(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(4);
-                xlsDto.setPlanEndTime(getValue(hssfCell));
+                xlsEntity.setPlanEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(5);
-                xlsDto.setTrialEndTime(getValue(hssfCell));
+                xlsEntity.setTrialEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(6);
-                xlsDto.setTaskId1(getValue(hssfCell));
+                xlsEntity.setTaskId1(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(7);
-                xlsDto.setTaskId2(getValue(hssfCell));
+                xlsEntity.setTaskId2(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(8);
-                xlsDto.setTaskId(getValue(hssfCell));
+                if (getValue(hssfCell).equals("")) {
+                    break;
+                }
+                xlsEntity.setTaskId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(9);
                 if (getValue(hssfCell).equals("")) {
                     break;
                 }
-                xlsDto.setDrawingNum(Float.valueOf(getValue(hssfCell)).intValue());
+                xlsEntity.setDrawingNum(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(10);
-                xlsDto.setDrawingName(getValue(hssfCell));
+                xlsEntity.setDrawingName(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(11);
-                xlsDto.setDrawingId(getValue(hssfCell));
+                xlsEntity.setDrawingId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(12);
-                if (getValue(hssfCell).equals("")) {
-                    break;
-                }
-                xlsDto.setNum(Float.valueOf(getValue(hssfCell)).intValue());
+                xlsEntity.setNum(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(13);
                 if (getValue(hssfCell).equals("")) {
                     break;
                 }
-                xlsDto.setProcedureId(Float.valueOf(getValue(hssfCell)).intValue());
+                xlsEntity.setProcedureId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(14);
-                xlsDto.setProcedureName(getValue(hssfCell));
+                xlsEntity.setProcedureName(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(15);
-                if (getValue(hssfCell).equals("")) {
-                    break;
-                }
-                xlsDto.setWorkHour(BigDecimal.valueOf(Double.parseDouble(getValue(hssfCell))));
+                xlsEntity.setWorkHour(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(16);
-                xlsDto.setTaskTime(getValue(hssfCell));
+                xlsEntity.setTaskTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(17);
-                xlsDto.setReceiveTime(getValue(hssfCell));
+                xlsEntity.setReceiveTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(18);
-                xlsDto.setEpiboleStatus(getValue(hssfCell));
+                xlsEntity.setEpiboleStatus(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(19);
-                xlsDto.setEpiboleCheckTime(getValue(hssfCell));
+                xlsEntity.setEpiboleCheckTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(20);
-                xlsDto.setEpiboleFactory(getValue(hssfCell));
+                xlsEntity.setEpiboleFactory(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(21);
-                xlsDto.setTaskType(getValue(hssfCell));
+                xlsEntity.setTaskType(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(22);
-                xlsDto.setApplicant(getValue(hssfCell));
+                xlsEntity.setApplicant(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(23);
-                xlsDto.setEpiboleEndTime(getValue(hssfCell));
+                xlsEntity.setEpiboleEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(24);
-                xlsDto.setPlanType(getValue(hssfCell));
+                xlsEntity.setPlanType(getValue(hssfCell));
 
-                list.add(xlsDto);
+                list.add(xlsEntity);
             }
         }
         return list;
-    }
-
-    private String getValue(HSSFCell hssfCell) {
-        if (null == hssfCell) {
-            return "";
-        } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_BOOLEAN) {
-            // 返回布尔类型的值
-            return String.valueOf(hssfCell.getBooleanCellValue());
-        } else if (hssfCell.getCellType() == hssfCell.CELL_TYPE_NUMERIC) {
-            // 返回数值类型的值
-            return String.valueOf(hssfCell.getNumericCellValue());
-        } else {
-            // 返回字符串类型的值
-            return String.valueOf(hssfCell.getStringCellValue());
-        }
     }
 
     /*
@@ -250,58 +249,48 @@ public class FileUploadAction extends ActionSupport {
     */
     @Override
     public String execute() throws Exception {
+        if (file == null) {
+            return ERROR;
+        }
         list = readXls();
         if (list.size() != 0) {
-            for (int i = 0; i < list.size(); i++) {
-                Session sess = HibernateUtil.currentSession();
-
-                Transaction tx = sess.beginTransaction();
-
-                int deletedEntities = sess.createQuery("delete from OrderEntity as order where order.taskId=:id")
-                        .setString("id", list.get(i).getTaskId())
-                        .executeUpdate();
-                tx.commit();
-
-                HibernateUtil.closeSession();
-            }
-
-
-            for (int i = 0; i < list.size(); i++) {
-                Session sess = HibernateUtil.currentSession();
-                Transaction tx = sess.beginTransaction();
+            Session session = HibernateUtil.currentSession();
+            Transaction transaction = session.beginTransaction();
+            for (XlsEntity aList : list) {
                 OrderEntity order = new OrderEntity();
 
-                order.setProcessRegion(list.get(i).getProcessRegion());
-                order.setAnnualPlan(list.get(i).getAnnualPlan());
-                order.setMonthlyPlan(list.get(i).getMonthlyPlan());
-                order.setPlansetTags(list.get(i).getPlansetTags());
-                order.setPlanEndTime(list.get(i).getPlanEndTime());
-                order.setTrialEndTime(list.get(i).getTrialEndTime());
-                order.setTaskId1(list.get(i).getTaskId1());
-                order.setTaskId2(list.get(i).getTaskId2());
-                order.setTaskId(list.get(i).getTaskId());
-                order.setDrawingNum(list.get(i).getDrawingNum());
-                order.setDrawingName(list.get(i).getDrawingName());
-                order.setDrawingId(list.get(i).getDrawingId());
-                order.setNum(list.get(i).getNum());
-                order.setProcedureId(list.get(i).getProcedureId());
-                order.setProcedureName(list.get(i).getProcedureName());
-                order.setWorkHour(list.get(i).getWorkHour());
-                order.setTaskTime(list.get(i).getTaskTime());
-                order.setReceiveTime(list.get(i).getReceiveTime());
-                order.setEpiboleStatus(list.get(i).getEpiboleStatus());
-                order.setEpiboleCheckTime(list.get(i).getEpiboleCheckTime());
-                order.setEpiboleFactory(list.get(i).getEpiboleFactory());
-                order.setTaskType(list.get(i).getTaskType());
-                order.setApplicant(list.get(i).getApplicant());
-                order.setEpiboleEndTime(list.get(i).getEpiboleEndTime());
-                order.setPlanType(list.get(i).getPlanType());
+                order.setProcessRegion(aList.getProcessRegion());
+                order.setAnnualPlan(aList.getAnnualPlan());
+                order.setMonthlyPlan(aList.getMonthlyPlan());
+                order.setPlansetTags(aList.getPlansetTags());
+                order.setPlanEndTime(Date.valueOf(aList.getPlanEndTime()));
+                order.setTrialEndTime(aList.getTrialEndTime());
+                order.setTaskId1(aList.getTaskId1());
+                order.setTaskId2(aList.getTaskId2());
+                order.setTaskId(aList.getTaskId());
+                order.setDrawingNum(Float.valueOf(aList.getDrawingNum()).intValue());
+                order.setDrawingName(aList.getDrawingName());
+                order.setDrawingId(aList.getDrawingId());
+                order.setNum(Float.valueOf(aList.getNum()).intValue());
+                order.setProcedureId(Float.valueOf(aList.getProcedureId()).intValue());
+                order.setProcedureName(aList.getProcedureName());
+                order.setWorkHour(BigDecimal.valueOf(Float.valueOf(aList.getWorkHour())));
+                order.setTaskTime(aList.getTaskTime());
+                if (!aList.getReceiveTime().equals("")) {
+                    order.setReceiveTime(Timestamp.valueOf(aList.getReceiveTime()));
+                }
+                order.setEpiboleStatus(aList.getEpiboleStatus());
+                order.setEpiboleCheckTime(aList.getEpiboleCheckTime());
+                order.setEpiboleFactory(aList.getEpiboleFactory());
+                order.setTaskType(aList.getTaskType());
+                order.setApplicant(aList.getApplicant());
+                order.setEpiboleEndTime(Date.valueOf(aList.getEpiboleEndTime()));
+                order.setPlanType(aList.getPlanType());
 
-                sess.save(order);
-                tx.commit();
-
-                HibernateUtil.closeSession();
+                session.saveOrUpdate(order);
             }
+            transaction.commit();
+            HibernateUtil.closeSession();
 
         }
 

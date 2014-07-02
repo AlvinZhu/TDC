@@ -9,13 +9,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title></title>
+    <title><s:text name="order.title"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<s:form action="FileUpload" method="post" enctype="multipart/form-data">
-    <s:file name="upload"><s:text name="import.upload"/></s:file>
-    <s:submit key="import.submit"/>
-</s:form>
+<jsp:include page="OrderQueryBody.jsp"/>
 </body>
 </html>

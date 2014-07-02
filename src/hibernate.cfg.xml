@@ -13,6 +13,7 @@
         <mapping resource="com/tdc/db/TaskInfoEntity.hbm.xml"/>
         <mapping resource="com/tdc/db/TaskInfoMetaEntity.hbm.xml"/>
         <mapping resource="com/tdc/db/OrderEntity.hbm.xml"/>
+        <mapping resource="com/tdc/db/WorkerEntity.hbm.xml"/>
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->
     </session-factory>

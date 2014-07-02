@@ -20,11 +20,11 @@
 </style>
 <div id=div0>
     <table class="stats">
-    <tr>
-        <td><s:a href="ExcelImport.jsp"><s:text name="index.excelImport"/></s:a></td>
-        <td><s:a href="TaskInfoQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
-        <td><s:a href="ExcelExport.jsp"><s:text name="index.excelExport"/></s:a></td>
-    </tr>
-</table>
-<hr/>
+        <tr>
+            <td><s:a href="/Order.jsp"><s:text name="index.excelImport"/></s:a></td>
+            <td><s:a href="/TaskInfoQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
+            <td><s:a href="/ExcelExport.jsp"><s:text name="index.excelExport"/></s:a></td>
+        </tr>
+    </table>
+    <hr/>
 </div>
