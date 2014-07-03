@@ -13,7 +13,7 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<jsp:include page="OrderQueryBody.jsp"/>
+<jsp:include page="OrderBody.jsp"/>
 <s:text name="import.success"/>
 <br/>
 <s:text name="import.filename"/>

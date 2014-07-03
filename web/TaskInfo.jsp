@@ -2,17 +2,17 @@
 <%--
   Created by IntelliJ IDEA.
   User: Alvin
-  Date: 2014/6/17
-  Time: 17:41
+  Date: 2014/6/22
+  Time: 12:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title><s:text name="error.title"/></title>
+    <title><s:text name="taskInfo.title"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<s:text name="error.title"/>
+<jsp:include page="TaskInfoBody.jsp"/>
 </body>
 </html>

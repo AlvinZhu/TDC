@@ -3,7 +3,7 @@ package com.tdc.db;
 import java.math.BigDecimal;
 
 /**
- * Created by Alvin on 2014/7/2.
+ * Created by Alvin on 2014/7/3.
  */
 public class TaskInfoMetaEntity {
     private String taskId;

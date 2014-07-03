@@ -13,6 +13,6 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<jsp:include page="OrderQueryBody.jsp"/>
+<jsp:include page="OrderBody.jsp"/>
 </body>
 </html>

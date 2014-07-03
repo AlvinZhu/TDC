@@ -9,18 +9,6 @@
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.ui.theme" value="simple"/>
     <package name="tdc" extends="struts-default">
-        <action name="TaskInfoMetaQuery" class="com.tdc.TaskInfoMetaQueryAction">
-            <result name="error">/error.jsp</result>
-            <result name="success">/TaskInfoUpdate.jsp</result>
-        </action>
-        <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
-            <result name="error">/error.jsp</result>
-            <result name="success">/ExcelExportSuccess.jsp</result>
-        </action>
-        <action name="TaskInfoUpdate" class="com.tdc.TaskInfoUpdateAction">
-            <result name="error">/error.jsp</result>
-            <result name="success">/TaskInfoPrint.jsp</result>
-        </action>
         <action name="OrderImport" class="com.tdc.OrderImportAction">
             <result name="success">/OrderImportSuccess.jsp</result>
             <result name="error">/error.jsp</result>
@@ -29,12 +17,26 @@
             <result name="error">/error.jsp</result>
             <result name="insert">/OrderQueryResult.jsp</result>
             <result name="query">/OrderQueryResult.jsp</result>
+            <result name="export">/OrderQueryExport.jsp</result>
             <result name="update">/OrderQueryResult.jsp</result>
             <result name="delete">/OrderQueryResult.jsp</result>
         </action>
-        <action name="Log" class="com.tdc.LogAction">
-            <result name="error">/LogFaild.jsp</result>
-            <result name="success">/LogSuccess.jsp</result>
+        <action name="XlsOut" class="com.tdc.XlsOutAction">
+            <result name="success" type="stream">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">fileInputStream</param>
+                <param name="contentDisposition">attachment;filename=export.xls</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+        <action name="TaskInfoMetaQuery" class="com.tdc.TaskInfoMetaQueryAction">
+            <result name="error">/error.jsp</result>
+            <result name="query">/TaskInfoMetaQueryResult.jsp</result>
+            <result name="success">/TaskInfoMetaUpdate.jsp</result>
+        </action>
+        <action name="TaskInfoMetaUpdate" class="com.tdc.TaskInfoMetaUpdateAction">
+            <result name="error">/error.jsp</result>
+            <result name="success">/TaskInfoMetaPrint.jsp</result>
         </action>
         <action name="TdcOut" class="com.tdc.TdcOutAction">
             <result name="success" type="stream">
@@ -43,6 +45,22 @@
                 <param name="contentDisposition">inline;filename=${fileName}</param>
                 <param name="bufferSize">1024</param>
             </result>
+        </action>
+        <action name="TaskInfo" class="com.tdc.TaskInfoAction">
+            <result name="error">/error.jsp</result>
+            <result name="insert">/TaskInfoQueryResult.jsp</result>
+            <result name="query">/TaskInfoQueryResult.jsp</result>
+            <result name="export">/TaskInfoQueryExport.jsp</result>
+            <result name="update">/TaskInfoQueryResult.jsp</result>
+            <result name="delete">/TaskInfoQueryResult.jsp</result>
+        </action>
+        <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
+            <result name="error">/error.jsp</result>
+            <result name="success">/TaskInfoQueryResult.jsp</result>
+        </action>
+        <action name="Log" class="com.tdc.LogAction">
+            <result name="error">/LogFaild.jsp</result>
+            <result name="success">/LogSuccess.jsp</result>
         </action>
     </package>
 </struts>

@@ -30,7 +30,7 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<jsp:include page="TaskInfoQueryBody.jsp"/>
+<jsp:include page="TaskInfoMetaQueryBody.jsp"/>
 <div id="left">
     <table class="stats">
     <tr>
@@ -51,7 +51,7 @@
     </table>
 </div>
 <div id="right">
-    <s:form action="TaskInfoUpdate">
+    <s:form action="TaskInfoMetaUpdate">
         <s:hidden name="taskId" value="%{taskId}"/>
         <s:hidden name="drawingNum" value="%{drawingNum}"/>
         <table class="stats">

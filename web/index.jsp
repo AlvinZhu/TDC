@@ -13,6 +13,6 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-Welcome！
+<s:text name="index.welcome"/>
 </body>
 </html>

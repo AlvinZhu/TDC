@@ -13,6 +13,6 @@
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<jsp:include page="TaskInfoQueryBody.jsp"/>
+<jsp:include page="TaskInfoMetaQueryBody.jsp"/>
 </body>
 </html>

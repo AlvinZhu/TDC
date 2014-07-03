@@ -21,9 +21,9 @@
 <div id=div0>
     <table class="stats">
         <tr>
-            <td><s:a href="/Order.jsp"><s:text name="index.excelImport"/></s:a></td>
-            <td><s:a href="/TaskInfoQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
-            <td><s:a href="/ExcelExport.jsp"><s:text name="index.excelExport"/></s:a></td>
+            <td><s:a href="Order.jsp"><s:text name="index.excelImport"/></s:a></td>
+            <td><s:a href="TaskInfoMetaQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
+            <td><s:a href="TaskInfo.jsp"><s:text name="index.excelExport"/></s:a></td>
         </tr>
     </table>
     <hr/>

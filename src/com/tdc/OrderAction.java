@@ -2,11 +2,19 @@ package com.tdc;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.OrderEntity;
+import org.apache.poi.hssf.usermodel.HSSFRichTextString;
+import org.apache.poi.hssf.usermodel.HSSFRow;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.interceptor.SessionAware;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
@@ -22,6 +30,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
     private String query;
     private String update;
     private String delete;
+    private String export;
 
     private String oldTaskId;
     private String oldDrawingNum;
@@ -50,6 +59,11 @@ public class OrderAction extends ActionSupport implements SessionAware {
 
         if (query != null) {
             return query();
+        }
+
+        if (export != null) {
+            query();
+            return export();
         }
 
         if (update != null) {
@@ -106,7 +120,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
     }
 
 
-    private String query() throws Exception {
+    public String query() throws Exception {
         session.clear();
         session.put("planEndTime", planEndTime);
         session.put("taskId1", taskId1);
@@ -297,6 +311,131 @@ public class OrderAction extends ActionSupport implements SessionAware {
         HibernateUtil.closeSession();
 
         return "query";
+    }
+
+    public String export() throws  Exception {
+        int countRow = list.size();
+        int countColumn = 25;
+
+        HSSFWorkbook hssfWorkbook = new HSSFWorkbook();
+        HSSFSheet hssfSheet = hssfWorkbook.createSheet("Sheet1");
+        HSSFRow HSSFRow = hssfSheet.createRow(0);
+
+        HSSFRow.createCell(0).setCellValue(new HSSFRichTextString("加工区域"));
+        HSSFRow.createCell(1).setCellValue(new HSSFRichTextString("年度计划"));
+        HSSFRow.createCell(2).setCellValue(new HSSFRichTextString("月度计划"));
+        HSSFRow.createCell(3).setCellValue(new HSSFRichTextString("计划组特殊标记"));
+        HSSFRow.createCell(4).setCellValue(new HSSFRichTextString("计划完成时间"));
+        HSSFRow.createCell(5).setCellValue(new HSSFRichTextString("试装计划完成时间"));
+        HSSFRow.createCell(6).setCellValue(new HSSFRichTextString("任务单号"));
+        HSSFRow.createCell(7).setCellValue(new HSSFRichTextString("任务流水号"));
+        HSSFRow.createCell(8).setCellValue(new HSSFRichTextString("生产令号"));
+        HSSFRow.createCell(9).setCellValue(new HSSFRichTextString("图纸序号"));
+        HSSFRow.createCell(10).setCellValue(new HSSFRichTextString("图纸名称"));
+        HSSFRow.createCell(11).setCellValue(new HSSFRichTextString("图纸编号"));
+        HSSFRow.createCell(12).setCellValue(new HSSFRichTextString("件数"));
+        HSSFRow.createCell(13).setCellValue(new HSSFRichTextString("工序号"));
+        HSSFRow.createCell(14).setCellValue(new HSSFRichTextString("工序名称"));
+        HSSFRow.createCell(15).setCellValue(new HSSFRichTextString("工序工时"));
+        HSSFRow.createCell(16).setCellValue(new HSSFRichTextString("任务安排时间"));
+        HSSFRow.createCell(17).setCellValue(new HSSFRichTextString("签收时间"));
+        HSSFRow.createCell(18).setCellValue(new HSSFRichTextString("外包状态"));
+        HSSFRow.createCell(19).setCellValue(new HSSFRichTextString("外协送验时间"));
+        HSSFRow.createCell(20).setCellValue(new HSSFRichTextString("外包厂家"));
+        HSSFRow.createCell(21).setCellValue(new HSSFRichTextString("任务类别"));
+        HSSFRow.createCell(22).setCellValue(new HSSFRichTextString("提出人"));
+        HSSFRow.createCell(23).setCellValue(new HSSFRichTextString("外包计划时间"));
+        HSSFRow.createCell(24).setCellValue(new HSSFRichTextString("计划形式"));
+
+
+        for (int i = 0; i < countRow; i++){
+            HSSFRow = hssfSheet.createRow(i + 1);
+            OrderEntity order = list.get(i);
+
+            if (order.getProcessRegion() != null) {
+                HSSFRow.createCell(0).setCellValue(order.getProcessRegion());
+            }
+            if (order.getAnnualPlan() != null) {
+                HSSFRow.createCell(1).setCellValue(order.getAnnualPlan());
+            }
+            if (order.getMonthlyPlan() != null) {
+                HSSFRow.createCell(2).setCellValue(order.getMonthlyPlan());
+            }
+            if (order.getPlansetTags() != null) {
+                HSSFRow.createCell(3).setCellValue(order.getPlansetTags());
+            }
+            if (order.getPlanEndTime().toString() != null) {
+                HSSFRow.createCell(4).setCellValue(order.getPlanEndTime().toString());
+            }
+            if (order.getTrialEndTime() != null) {
+                HSSFRow.createCell(5).setCellValue(order.getTrialEndTime());
+            }
+            if (order.getTaskId1() != null) {
+                HSSFRow.createCell(6).setCellValue(order.getTaskId1());
+            }
+            if (order.getTaskId2() != null) {
+                HSSFRow.createCell(7).setCellValue(order.getTaskId2());
+            }
+            if (order.getTaskId() != null) {
+                HSSFRow.createCell(8).setCellValue(order.getTaskId());
+            }
+
+            HSSFRow.createCell(9).setCellValue(order.getDrawingNum());
+
+            if (order.getDrawingName() != null) {
+                HSSFRow.createCell(10).setCellValue(order.getDrawingName());
+            }
+            if (order.getDrawingId() != null) {
+                HSSFRow.createCell(11).setCellValue(order.getDrawingId());
+            }
+            if (order.getNum() != null) {
+                HSSFRow.createCell(12).setCellValue(order.getNum());
+            }
+
+            if (order.getTaskTime() != null) {
+                HSSFRow.createCell(16).setCellValue(order.getTaskTime());
+            }
+            if (order.getReceiveTime() != null) {
+                HSSFRow.createCell(17).setCellValue(order.getReceiveTime().toString());
+            }
+            if (order.getEpiboleStatus() != null) {
+                HSSFRow.createCell(18).setCellValue(order.getEpiboleStatus());
+            }
+            if (order.getEpiboleCheckTime() != null) {
+                HSSFRow.createCell(19).setCellValue(order.getEpiboleCheckTime());
+            }
+            if (order.getEpiboleFactory() != null) {
+                HSSFRow.createCell(20).setCellValue(order.getEpiboleFactory());
+            }
+            if (order.getTaskType() != null) {
+                HSSFRow.createCell(21).setCellValue(order.getTaskType());
+            }
+            if (order.getApplicant() != null) {
+                HSSFRow.createCell(22).setCellValue(order.getApplicant());
+            }
+            if (order.getEpiboleEndTime() != null) {
+                HSSFRow.createCell(23).setCellValue(order.getEpiboleEndTime().toString());
+            }
+            if (order.getPlanType() != null) {
+                HSSFRow.createCell(24).setCellValue(order.getPlanType());
+            }
+
+            HSSFRow.createCell(13).setCellValue(order.getProcedureId());
+
+            if (order.getProcedureName() != null) {
+                HSSFRow.createCell(14).setCellValue(order.getProcedureName());
+            }
+            if (order.getWorkHour() != null) {
+                HSSFRow.createCell(15).setCellValue(order.getWorkHour().doubleValue());
+            }
+        }
+
+        File file = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "export.xls");
+        OutputStream out = new FileOutputStream(file);
+        hssfWorkbook.write(out);
+        out.close();
+
+        return "export";
     }
 
     public String update() throws Exception {
@@ -571,5 +710,13 @@ public class OrderAction extends ActionSupport implements SessionAware {
 
     public void setOldProcedureId(String oldProcedureId) {
         this.oldProcedureId = oldProcedureId;
+    }
+
+    public String getExport() {
+        return export;
+    }
+
+    public void setExport(String export) {
+        this.export = export;
     }
 }

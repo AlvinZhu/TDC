@@ -1,7 +1,7 @@
 package com.tdc.db;
 
 /**
- * Created by Alvin on 2014/7/2.
+ * Created by Alvin on 2014/7/3.
  */
 public class WorkerEntity {
     private String workerId;
