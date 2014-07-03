@@ -138,7 +138,7 @@ public class LogAction extends ActionSupport {
                         .setString("id", getTaskId())
                         .setString("num", getDrawingNum().toString())
                         .setString("pid", getProcedureId().toString())
-                        .setString("did", getWorkerId())
+                        .setString("did", getDeviceId())
                         .setString("wid", getWorkerId())
                         .list();
 
