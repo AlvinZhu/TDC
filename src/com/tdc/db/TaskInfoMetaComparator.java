@@ -12,7 +12,15 @@ public class TaskInfoMetaComparator implements Comparator {
     public int compare(Object o1, Object o2) {
         TaskInfoMetaEntity t1 = (TaskInfoMetaEntity) o1;
         TaskInfoMetaEntity t2 = (TaskInfoMetaEntity) o2;
-        return Integer.toString(t1.getProcedureId()).compareTo(Integer.toString(t2.getProcedureId()));
+        int i;
+        if (t1.getProcedureId() > t2.getProcedureId()){
+            i = 1;
+        } else if (t1.getProcedureId() < t2.getProcedureId()){
+            i = -1;
+        } else {
+            i = 0;
+        }
+        return i;
     }
 }
 

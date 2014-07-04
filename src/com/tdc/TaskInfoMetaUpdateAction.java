@@ -6,6 +6,8 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.opensymphony.xwork2.ActionSupport;
+import com.tdc.db.OrderEntity;
+import com.tdc.db.TaskInfoEntity;
 import com.tdc.db.TaskInfoMetaComparator;
 import com.tdc.db.TaskInfoMetaEntity;
 import org.apache.struts2.ServletActionContext;
@@ -14,18 +16,25 @@ import org.hibernate.Transaction;
 
 import java.io.File;
 import java.nio.file.Path;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * Created by Alvin on 2014/6/19.
  */
 public class TaskInfoMetaUpdateAction extends ActionSupport {
-    private String taskId;
     private List<TaskInfoMetaEntity> resultListNew;
+    private List<List<TaskInfoMetaEntity>> listSet;
+
+    private String taskId;
     private String drawingNum;
+    private String drawingName;
+    private String drawingId;
+    private Integer num;
+    private String date;
+
+    public TaskInfoMetaUpdateAction() {
+    }
 
     @Override
     public String execute() throws Exception {
@@ -33,6 +42,11 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             Session sess = HibernateUtil.currentSession();
 
             Transaction tx = sess.beginTransaction();
+
+            List<OrderEntity> list = sess.createQuery("from OrderEntity as order where order.taskId=:taskId and order.drawingNum=:drawingNum")
+                    .setString("taskId",taskId)
+                    .setString("drawingNum",drawingNum)
+                    .list();
 
             int deletedEntities = sess.createQuery("delete from TaskInfoMetaEntity as task where task.taskId=:id and task.drawingNum=:num")
                     .setString("id", getTaskId())
@@ -43,6 +57,12 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             HibernateUtil.closeSession();
 
 
+            drawingName = list.get(0).getDrawingName();
+            drawingId = list.get(0).getDrawingId();
+            num = list.get(0).getNum();
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            date = dateFormat.format(new Date());
 //            for (int i = 0; i < 16; i++) {
 //                Integer id = resultListNew.get(i).getProcedureId();
 //                while ((null != id) && (i + 1 != id)) {
@@ -54,17 +74,16 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 //            }
 
             for (int i = 15; i >= 0; i--) {
-                if( resultListNew.get(i).getProcedureId() == 0){
+                if( resultListNew.get(i).getProcedureId() == 0 || resultListNew.get(i).getProcedureName().equals("")){
                     resultListNew.remove(i);
                 }
             }
             TaskInfoMetaComparator comparator=new TaskInfoMetaComparator();
             Collections.sort(resultListNew, comparator);
 
+
+
             for (TaskInfoMetaEntity aResultListNew : resultListNew) {
-                if (aResultListNew.getProcedureName().equals("")) {
-                    continue;
-                }
                 sess = HibernateUtil.currentSession();
                 tx = sess.beginTransaction();
                 aResultListNew.setTaskId(getTaskId());
@@ -85,6 +104,31 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
                 Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "tdc" + aResultListNew.getProcedureId() + ".jpg").toPath();
                 MatrixToImageWriter.writeToPath(bitMatrix, "jpg", path);
                 //System.out.println(path);
+            }
+
+            int count = resultListNew.size();
+            Iterator<TaskInfoMetaEntity> iterator = resultListNew.iterator();
+            List<TaskInfoMetaEntity> tmpList;
+            listSet = new ArrayList<List<TaskInfoMetaEntity>>();
+            while (count > 7){
+                tmpList = new ArrayList<TaskInfoMetaEntity>();
+                for(int i = 0; i < 7; i++){
+                    tmpList.add(iterator.next());
+                }
+                listSet.add(tmpList);
+                count -= 7;
+            }
+            if (iterator.hasNext()) {
+                tmpList = new ArrayList<TaskInfoMetaEntity>();
+                while (iterator.hasNext()){
+                    tmpList.add(iterator.next());
+                }
+                if (count > 4){
+                    for (int i = 0; i < 7 - count; i++){
+                        tmpList.add(new TaskInfoMetaEntity());
+                    }
+                }
+                listSet.add(tmpList);
             }
 
             return SUCCESS;
@@ -114,5 +158,45 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 
     public void setDrawingNum(String drawingNum) {
         this.drawingNum = drawingNum;
+    }
+
+    public String getDrawingName() {
+        return drawingName;
+    }
+
+    public void setDrawingName(String drawingName) {
+        this.drawingName = drawingName;
+    }
+
+    public String getDrawingId() {
+        return drawingId;
+    }
+
+    public void setDrawingId(String drawingId) {
+        this.drawingId = drawingId;
+    }
+
+    public Integer getNum() {
+        return num;
+    }
+
+    public void setNum(Integer num) {
+        this.num = num;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setListSet(List<List<TaskInfoMetaEntity>> listSet) {
+        this.listSet = listSet;
+    }
+
+    public List<List<TaskInfoMetaEntity>> getListSet() {
+        return listSet;
     }
 }
