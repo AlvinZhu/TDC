@@ -17,7 +17,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -38,17 +37,17 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
     private String oldDrawingNum;
     private String oldProcedureId;
 
-//    private String planEndTime;
+    //    private String planEndTime;
 //    private String taskId1;
     private String taskId;
     private String drawingNum;
-//    private String drawingName;
+    //    private String drawingName;
 //    private String drawingId;
 //    private String num;
     private String procedureId;
     private String procedureName;
     private BigDecimal workHour;
-//    private String receiveTime;
+    //    private String receiveTime;
 //    private String epiboleEndTime;
     private BigDecimal qualified;
     private BigDecimal unqualified;
@@ -469,7 +468,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         return "query";
     }
 
-    public String export() throws  Exception {
+    public String export() throws Exception {
         int countRow = list.size();
         int countColumn = 25;
 
@@ -520,7 +519,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 
         List<OrderEntity> orderEntityList;
         OrderEntity order = null;
-        for (int i = 0; i < countRow; i++){
+        for (int i = 0; i < countRow; i++) {
             HSSFRow = hssfSheet.createRow(i + 1);
             TaskInfoEntity task = list.get(i);
 
@@ -565,7 +564,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                 HSSFRow.createCell(8).setCellValue(order.getTaskId());
             }
 
-                HSSFRow.createCell(9).setCellValue(order.getDrawingNum());
+            HSSFRow.createCell(9).setCellValue(order.getDrawingNum());
 
             if (order.getDrawingName() != null) {
                 HSSFRow.createCell(10).setCellValue(order.getDrawingName());
@@ -605,7 +604,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                 HSSFRow.createCell(24).setCellValue(order.getPlanType());
             }
 
-                HSSFRow.createCell(13).setCellValue(task.getProcedureId());
+            HSSFRow.createCell(13).setCellValue(task.getProcedureId());
 
             if (task.getProcedureName() != null) {
                 HSSFRow.createCell(14).setCellValue(task.getProcedureName());
@@ -990,75 +989,75 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         this.export = export;
     }
 
-    public void setQualified(BigDecimal qualified) {
-        this.qualified = qualified;
-    }
-
     public BigDecimal getQualified() {
         return qualified;
     }
 
-    public void setUnqualified(BigDecimal unqualified) {
-        this.unqualified = unqualified;
+    public void setQualified(BigDecimal qualified) {
+        this.qualified = qualified;
     }
 
     public BigDecimal getUnqualified() {
         return unqualified;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setUnqualified(BigDecimal unqualified) {
+        this.unqualified = unqualified;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStartTime(String startTime) {
-        this.startTime = startTime;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getStartTime() {
         return startTime;
     }
 
-    public void setFinishTime(String finishTime) {
-        this.finishTime = finishTime;
+    public void setStartTime(String startTime) {
+        this.startTime = startTime;
     }
 
     public String getFinishTime() {
         return finishTime;
     }
 
-    public void setWorkerId(String workerId) {
-        this.workerId = workerId;
+    public void setFinishTime(String finishTime) {
+        this.finishTime = finishTime;
     }
 
     public String getWorkerId() {
         return workerId;
     }
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
     }
 
     public String getDeviceId() {
         return deviceId;
     }
 
-    public void setCheckerId(String checkerId) {
-        this.checkerId = checkerId;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
     public String getCheckerId() {
         return checkerId;
     }
 
-    public void setCheckTime(String checkTime) {
-        this.checkTime = checkTime;
+    public void setCheckerId(String checkerId) {
+        this.checkerId = checkerId;
     }
 
     public String getCheckTime() {
         return checkTime;
+    }
+
+    public void setCheckTime(String checkTime) {
+        this.checkTime = checkTime;
     }
 }

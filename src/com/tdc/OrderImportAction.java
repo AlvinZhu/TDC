@@ -2,7 +2,7 @@ package com.tdc;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.OrderEntity;
-import com.tdc.xls.XlsEntity;
+import com.tdc.xls.OrderXlsEntity;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -28,7 +28,7 @@ public class OrderImportAction extends ActionSupport {
     private String contentType;
     private String filename;
     private File file;
-    private List<XlsEntity> list;
+    private List<OrderXlsEntity> list;
 
     public void setFileContentType(String contentType) {
         this.contentType = contentType;
@@ -54,11 +54,11 @@ public class OrderImportAction extends ActionSupport {
         this.file = file;
     }
 
-    public List<XlsEntity> getList() {
+    public List<OrderXlsEntity> getList() {
         return list;
     }
 
-    public void setList(List<XlsEntity> list) {
+    public void setList(List<OrderXlsEntity> list) {
         this.list = list;
     }
 
@@ -75,15 +75,15 @@ public class OrderImportAction extends ActionSupport {
             return "";
         }
     }
-    
-    private List<XlsEntity> readXls() throws IOException {
+
+    private List<OrderXlsEntity> readXls() throws IOException {
         InputStream inputStream;
         HSSFWorkbook hssfWorkbook;
-        XlsEntity xlsEntity;
+        OrderXlsEntity orderXlsEntity;
         HSSFSheet hssfSheet;
         HSSFRow hssfRow;
         HSSFCell hssfCell;
-        List<XlsEntity> list;
+        List<OrderXlsEntity> list;
 
         if (null == file) {
             return null;
@@ -91,7 +91,7 @@ public class OrderImportAction extends ActionSupport {
 
         inputStream = new FileInputStream(file);
         hssfWorkbook = new HSSFWorkbook(inputStream);
-        list = new ArrayList<XlsEntity>();
+        list = new ArrayList<OrderXlsEntity>();
         // 循环工作表Sheet
         for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
             hssfSheet = hssfWorkbook.getSheetAt(numSheet);
@@ -104,93 +104,93 @@ public class OrderImportAction extends ActionSupport {
                 if (hssfRow == null) {
                     continue;
                 }
-                xlsEntity = new XlsEntity();
+                orderXlsEntity = new OrderXlsEntity();
 
                 hssfCell = hssfRow.getCell(0);
-                xlsEntity.setProcessRegion(getValue(hssfCell));
+                orderXlsEntity.setProcessRegion(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(1);
-                xlsEntity.setAnnualPlan(getValue(hssfCell));
+                orderXlsEntity.setAnnualPlan(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(2);
-                xlsEntity.setMonthlyPlan(getValue(hssfCell));
+                orderXlsEntity.setMonthlyPlan(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(3);
-                xlsEntity.setPlansetTags(getValue(hssfCell));
+                orderXlsEntity.setPlansetTags(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(4);
-                xlsEntity.setPlanEndTime(getValue(hssfCell));
+                orderXlsEntity.setPlanEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(5);
-                xlsEntity.setTrialEndTime(getValue(hssfCell));
+                orderXlsEntity.setTrialEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(6);
-                xlsEntity.setTaskId1(getValue(hssfCell));
+                orderXlsEntity.setTaskId1(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(7);
-                xlsEntity.setTaskId2(getValue(hssfCell));
+                orderXlsEntity.setTaskId2(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(8);
                 if (getValue(hssfCell).equals("")) {
                     break;
                 }
-                xlsEntity.setTaskId(getValue(hssfCell));
+                orderXlsEntity.setTaskId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(9);
                 if (getValue(hssfCell).equals("")) {
                     break;
                 }
-                xlsEntity.setDrawingNum(getValue(hssfCell));
+                orderXlsEntity.setDrawingNum(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(10);
-                xlsEntity.setDrawingName(getValue(hssfCell));
+                orderXlsEntity.setDrawingName(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(11);
-                xlsEntity.setDrawingId(getValue(hssfCell));
+                orderXlsEntity.setDrawingId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(12);
-                xlsEntity.setNum(getValue(hssfCell));
+                orderXlsEntity.setNum(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(13);
                 if (getValue(hssfCell).equals("")) {
                     break;
                 }
-                xlsEntity.setProcedureId(getValue(hssfCell));
+                orderXlsEntity.setProcedureId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(14);
-                xlsEntity.setProcedureName(getValue(hssfCell));
+                orderXlsEntity.setProcedureName(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(15);
-                xlsEntity.setWorkHour(getValue(hssfCell));
+                orderXlsEntity.setWorkHour(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(16);
-                xlsEntity.setTaskTime(getValue(hssfCell));
+                orderXlsEntity.setTaskTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(17);
-                xlsEntity.setReceiveTime(getValue(hssfCell));
+                orderXlsEntity.setReceiveTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(18);
-                xlsEntity.setEpiboleStatus(getValue(hssfCell));
+                orderXlsEntity.setEpiboleStatus(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(19);
-                xlsEntity.setEpiboleCheckTime(getValue(hssfCell));
+                orderXlsEntity.setEpiboleCheckTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(20);
-                xlsEntity.setEpiboleFactory(getValue(hssfCell));
+                orderXlsEntity.setEpiboleFactory(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(21);
-                xlsEntity.setTaskType(getValue(hssfCell));
+                orderXlsEntity.setTaskType(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(22);
-                xlsEntity.setApplicant(getValue(hssfCell));
+                orderXlsEntity.setApplicant(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(23);
-                xlsEntity.setEpiboleEndTime(getValue(hssfCell));
+                orderXlsEntity.setEpiboleEndTime(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(24);
-                xlsEntity.setPlanType(getValue(hssfCell));
+                orderXlsEntity.setPlanType(getValue(hssfCell));
 
-                list.add(xlsEntity);
+                list.add(orderXlsEntity);
             }
         }
         return list;
@@ -205,7 +205,7 @@ public class OrderImportAction extends ActionSupport {
         if (list.size() != 0) {
             Session session = HibernateUtil.currentSession();
             Transaction transaction = session.beginTransaction();
-            for (XlsEntity aList : list) {
+            for (OrderXlsEntity aList : list) {
                 OrderEntity order = new OrderEntity();
 
                 order.setProcessRegion(aList.getProcessRegion());

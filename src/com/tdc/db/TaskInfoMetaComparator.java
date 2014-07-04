@@ -13,9 +13,9 @@ public class TaskInfoMetaComparator implements Comparator {
         TaskInfoMetaEntity t1 = (TaskInfoMetaEntity) o1;
         TaskInfoMetaEntity t2 = (TaskInfoMetaEntity) o2;
         int i;
-        if (t1.getProcedureId() > t2.getProcedureId()){
+        if (t1.getProcedureId() > t2.getProcedureId()) {
             i = 1;
-        } else if (t1.getProcedureId() < t2.getProcedureId()){
+        } else if (t1.getProcedureId() < t2.getProcedureId()) {
             i = -1;
         } else {
             i = 0;

@@ -7,6 +7,7 @@ public class WorkerEntity {
     private String workerId;
     private String deviceId;
     private String procedureName;
+    private String workerName;
 
     public String getWorkerId() {
         return workerId;
@@ -53,5 +54,13 @@ public class WorkerEntity {
         result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
         result = 31 * result + (procedureName != null ? procedureName.hashCode() : 0);
         return result;
+    }
+
+    public String getWorkerName() {
+        return workerName;
+    }
+
+    public void setWorkerName(String workerName) {
+        this.workerName = workerName;
     }
 }

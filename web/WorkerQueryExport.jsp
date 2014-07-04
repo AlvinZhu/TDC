@@ -3,16 +3,17 @@
   Created by IntelliJ IDEA.
   User: Alvin
   Date: 2014/6/22
-  Time: 12:09
+  Time: 12:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title><s:text name="query.query"/></title>
+    <title><s:text name="order.title"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>
-<jsp:include page="ExcelExportBody.jsp"/>
+<jsp:include page="WorkerBody.jsp"/>
+<s:a href="XlsOut.action"><s:text name="export.download"/></s:a>
 </body>
 </html>

@@ -38,7 +38,7 @@
             <%--<s:hidden name="oldProcedureId" value="%{#pl.procedureId}"/>--%>
             <tr>
                 <td><s:submit key="result.select" name="select"/></td>
-                <%--<td><s:submit key="result.delete" name="delete"/></td>--%>
+                    <%--<td><s:submit key="result.delete" name="delete"/></td>--%>
                 <td><s:textfield name="planEndTime" value="%{getText('global.date', {#pl.planEndTime})}"/></td>
                 <td><s:textfield name="taskId1" value="%{#pl.taskId1}"/></td>
                 <td><s:textfield name="taskId" value="%{#pl.taskId}"/></td>
@@ -46,9 +46,9 @@
                 <td><s:textfield name="drawingName" value="%{#pl.drawingName}"/></td>
                 <td><s:textfield name="drawingId" value="%{#pl.drawingId}"/></td>
                 <td><s:textfield name="num" value="%{#pl.num}"/></td>
-                <%--<td><s:textfield name="procedureId" value="%{#pl.procedureId}"/></td>--%>
-                <%--<td><s:textfield name="procedureName" value="%{#pl.procedureName}"/></td>--%>
-                <%--<td><s:textfield name="workHour" value="%{#pl.workHour}"/></td>--%>
+                    <%--<td><s:textfield name="procedureId" value="%{#pl.procedureId}"/></td>--%>
+                    <%--<td><s:textfield name="procedureName" value="%{#pl.procedureName}"/></td>--%>
+                    <%--<td><s:textfield name="workHour" value="%{#pl.workHour}"/></td>--%>
                 <td><s:textfield name="receiveTime" value="%{getText('global.datetime',{#pl.receiveTime})}"/></td>
                 <td><s:textfield name="epiboleEndTime" value="%{getText('global.date',{#pl.epiboleEndTime})}"/></td>
             </tr>

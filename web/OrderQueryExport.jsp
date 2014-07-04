@@ -9,7 +9,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-<title><s:text name="order.title"/></title>
+    <title><s:text name="order.title"/></title>
 </head>
 <body>
 <jsp:include page="head.jsp"/>

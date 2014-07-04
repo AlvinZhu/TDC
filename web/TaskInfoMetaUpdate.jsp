@@ -24,6 +24,7 @@
             height: auto;
             width: auto;
         }
+
         -->
     </style>
 
@@ -33,7 +34,7 @@
 <jsp:include page="TaskInfoMetaQueryBody.jsp"/>
 <div id="left">
     <table class="stats">
-    <tr>
+        <tr>
             <td colspan="3">原工艺单</td>
         </tr>
         <tr>
@@ -55,7 +56,7 @@
         <s:hidden name="taskId" value="%{taskId}"/>
         <s:hidden name="drawingNum" value="%{drawingNum}"/>
         <table class="stats">
-        <tr>
+            <tr>
                 <td colspan="3">新工艺单</td>
             </tr>
             <tr>

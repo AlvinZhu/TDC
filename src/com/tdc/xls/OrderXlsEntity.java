@@ -3,7 +3,7 @@ package com.tdc.xls;
 /**
  * Created by Alvin on 2014/6/22.
  */
-public class XlsEntity {
+public class OrderXlsEntity {
     private String processRegion;
     private String annualPlan;
     private String monthlyPlan;

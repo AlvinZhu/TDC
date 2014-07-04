@@ -25,14 +25,14 @@
             <td><s:textfield name="drawingName"/></td>
             <td><s:text name="insert.drawingId"/></td>
             <td><s:textfield name="drawingId"/></td>
-            <%--<td></td>--%>
-            <%--<td></td>--%>
+                <%--<td></td>--%>
+                <%--<td></td>--%>
         </tr>
         <tr>
-            <%--<td></td>--%>
-            <%--<td></td>--%>
-                <td><s:text name="insert.num"/></td>
-                <td><s:textfield name="num"/></td>
+                <%--<td></td>--%>
+                <%--<td></td>--%>
+            <td><s:text name="insert.num"/></td>
+            <td><s:textfield name="num"/></td>
             <td><s:text name="insert.receiveTime"/></td>
             <td><s:textfield name="receiveTime"/></td>
             <td><s:text name="insert.epiboleEndTime"/></td>

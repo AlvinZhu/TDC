@@ -7,7 +7,6 @@ import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.OrderEntity;
-import com.tdc.db.TaskInfoEntity;
 import com.tdc.db.TaskInfoMetaComparator;
 import com.tdc.db.TaskInfoMetaEntity;
 import org.apache.struts2.ServletActionContext;
@@ -25,6 +24,7 @@ import java.util.*;
 public class TaskInfoMetaUpdateAction extends ActionSupport {
     private List<TaskInfoMetaEntity> resultListNew;
     private List<List<TaskInfoMetaEntity>> listSet;
+    private int listSize;
 
     private String taskId;
     private String drawingNum;
@@ -44,8 +44,8 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             Transaction tx = sess.beginTransaction();
 
             List<OrderEntity> list = sess.createQuery("from OrderEntity as order where order.taskId=:taskId and order.drawingNum=:drawingNum")
-                    .setString("taskId",taskId)
-                    .setString("drawingNum",drawingNum)
+                    .setString("taskId", taskId)
+                    .setString("drawingNum", drawingNum)
                     .list();
 
             int deletedEntities = sess.createQuery("delete from TaskInfoMetaEntity as task where task.taskId=:id and task.drawingNum=:num")
@@ -74,13 +74,12 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 //            }
 
             for (int i = 15; i >= 0; i--) {
-                if( resultListNew.get(i).getProcedureId() == 0 || resultListNew.get(i).getProcedureName().equals("")){
+                if (resultListNew.get(i).getProcedureId() == 0 || resultListNew.get(i).getProcedureName().equals("")) {
                     resultListNew.remove(i);
                 }
             }
-            TaskInfoMetaComparator comparator=new TaskInfoMetaComparator();
+            TaskInfoMetaComparator comparator = new TaskInfoMetaComparator();
             Collections.sort(resultListNew, comparator);
-
 
 
             for (TaskInfoMetaEntity aResultListNew : resultListNew) {
@@ -100,7 +99,7 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
                 Map hints = new HashMap();
                 hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
                 BitMatrix bitMatrix = null;
-                bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 350, 350, hints);
+                bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 100, 100, hints);
                 Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "tdc" + aResultListNew.getProcedureId() + ".jpg").toPath();
                 MatrixToImageWriter.writeToPath(bitMatrix, "jpg", path);
                 //System.out.println(path);
@@ -110,26 +109,45 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             Iterator<TaskInfoMetaEntity> iterator = resultListNew.iterator();
             List<TaskInfoMetaEntity> tmpList;
             listSet = new ArrayList<List<TaskInfoMetaEntity>>();
-            while (count > 7){
+            if (count > 7){
                 tmpList = new ArrayList<TaskInfoMetaEntity>();
-                for(int i = 0; i < 7; i++){
+                for (int i = 0; i < 7; i++) {
                     tmpList.add(iterator.next());
                 }
                 listSet.add(tmpList);
                 count -= 7;
+            } else if (count > 4) {
+                tmpList = new ArrayList<TaskInfoMetaEntity>();
+                while (iterator.hasNext()) {
+                    tmpList.add(iterator.next());
+                }
+
+                for (int i = 0; i < 7 - count; i++) {
+                    tmpList.add(new TaskInfoMetaEntity());
+                }
+                listSet.add(tmpList);
+            }
+            while (count > 8) {
+                tmpList = new ArrayList<TaskInfoMetaEntity>();
+                for (int i = 0; i < 8; i++) {
+                    tmpList.add(iterator.next());
+                }
+                listSet.add(tmpList);
+                count -= 8;
             }
             if (iterator.hasNext()) {
                 tmpList = new ArrayList<TaskInfoMetaEntity>();
-                while (iterator.hasNext()){
+                while (iterator.hasNext()) {
                     tmpList.add(iterator.next());
                 }
-                if (count > 4){
-                    for (int i = 0; i < 7 - count; i++){
+                if (count > 5) {
+                    for (int i = 0; i < 8 - count; i++) {
                         tmpList.add(new TaskInfoMetaEntity());
                     }
                 }
                 listSet.add(tmpList);
             }
+            listSize = listSet.size() - 1;
 
             return SUCCESS;
         }
@@ -192,11 +210,19 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
         this.date = date;
     }
 
+    public List<List<TaskInfoMetaEntity>> getListSet() {
+        return listSet;
+    }
+
     public void setListSet(List<List<TaskInfoMetaEntity>> listSet) {
         this.listSet = listSet;
     }
 
-    public List<List<TaskInfoMetaEntity>> getListSet() {
-        return listSet;
+    public int getListSize() {
+        return listSize;
+    }
+
+    public void setListSize(int listSize) {
+        this.listSize = listSize;
     }
 }

@@ -313,7 +313,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
         return "query";
     }
 
-    public String export() throws  Exception {
+    public String export() throws Exception {
         int countRow = list.size();
         int countColumn = 25;
 
@@ -348,7 +348,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
         HSSFRow.createCell(24).setCellValue(new HSSFRichTextString("计划形式"));
 
 
-        for (int i = 0; i < countRow; i++){
+        for (int i = 0; i < countRow; i++) {
             HSSFRow = hssfSheet.createRow(i + 1);
             OrderEntity order = list.get(i);
 

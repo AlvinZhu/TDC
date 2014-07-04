@@ -17,6 +17,7 @@
         height: 28px;
         border: 1px #000 solid;
     }
+     P {page-break-after: always}
 </style>
 <div id=div0>
     <table class="stats">
@@ -24,6 +25,7 @@
             <td><s:a href="Order.jsp"><s:text name="index.excelImport"/></s:a></td>
             <td><s:a href="TaskInfoMetaQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
             <td><s:a href="TaskInfo.jsp"><s:text name="index.excelExport"/></s:a></td>
+            <td><s:a href="Worker.jsp"><s:text name="index.worker"/></s:a></td>
         </tr>
     </table>
     <hr/>

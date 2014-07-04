@@ -204,7 +204,7 @@ public class TaskInfoMetaQueryAction extends ActionSupport {
 
         Set<OrderEntity> set = new HashSet<OrderEntity>();
         List<OrderEntity> newList = new ArrayList<OrderEntity>();
-        for(Iterator<OrderEntity> iterator = list.iterator(); iterator.hasNext();) {
+        for (Iterator<OrderEntity> iterator = list.iterator(); iterator.hasNext(); ) {
             OrderEntity element = iterator.next();
             element.setWorkHour(BigDecimal.valueOf(0));
             element.setProcedureId(0);
@@ -522,6 +522,7 @@ public class TaskInfoMetaQueryAction extends ActionSupport {
     public void setList(List<OrderEntity> list) {
         this.list = list;
     }
+
     public String getTaskId() {
         return taskId;
     }

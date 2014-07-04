@@ -54,9 +54,17 @@
             <result name="update">/TaskInfoQueryResult.jsp</result>
             <result name="delete">/TaskInfoQueryResult.jsp</result>
         </action>
-        <action name="TaskInfoQuery" class="com.tdc.TaskInfoQueryAction">
+        <action name="WorkerImport" class="com.tdc.WorkerImportAction">
+            <result name="success">/WorkerImportSuccess.jsp</result>
             <result name="error">/error.jsp</result>
-            <result name="success">/TaskInfoQueryResult.jsp</result>
+        </action>
+        <action name="Worker" class="com.tdc.WorkerAction">
+            <result name="error">/error.jsp</result>
+            <result name="insert">/WorkerQueryResult.jsp</result>
+            <result name="query">/WorkerQueryResult.jsp</result>
+            <result name="export">/WorkerQueryExport.jsp</result>
+            <result name="update">/WorkerQueryResult.jsp</result>
+            <result name="delete">/WorkerQueryResult.jsp</result>
         </action>
         <action name="Log" class="com.tdc.LogAction">
             <result name="error">/LogFaild.jsp</result>
