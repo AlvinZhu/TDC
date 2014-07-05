@@ -233,7 +233,7 @@ public class TaskInfoMetaQueryAction extends ActionSupport {
         if (query != null) {
             return query();
         }
-        if (taskId.length() != 0) {
+        if (!"".equals(taskId)) {
             Session sess = HibernateUtil.currentSession();
 
             Transaction tx = sess.beginTransaction();

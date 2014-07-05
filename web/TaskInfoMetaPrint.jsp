@@ -66,35 +66,35 @@
             <tbody>
             <tr>
                 <td colspan="11" rowspan="2" align="center" valign="middle" nowrap
-                    style="text-align: center; font-size: xx-large; font-weight: bold;"><img src="logo.png" width="103"
+                    style="text-align: center; font-size: 32px; font-weight: 700;"><img src="logo.png" width="103"
                                                                                              height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产&nbsp;品&nbsp;质&nbsp;量&nbsp;跟&nbsp;踪&nbsp;卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
-                <td align="center" valign="middle" nowrap style="font-size: small">制单日期</td>
-                <td align="center" valign="middle" nowrap style="font-size: small">计划数量</td>
+                <td align="center" valign="middle" nowrap style="font-size: 14px">制单日期</td>
+                <td align="center" valign="middle" nowrap style="font-size: 14px">计划数量</td>
             </tr>
             <tr>
-                <td align="center" valign="middle" nowrap style="font-size: small"><s:property value="%{date}"/></td>
-                <td align="center" valign="middle" nowrap style="font-size: small"><s:property value="%{num}"/></td>
+                <td align="center" valign="middle" nowrap style="font-size: 14px"><s:property value="%{date}"/></td>
+                <td align="center" valign="middle" nowrap style="font-size: 14px"><s:property value="%{num}"/></td>
             </tr>
             <tr>
-                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: small;">产品名称
+                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: 14px;">产品名称
                 </td>
-                <td colspan="4" align="center" valign="middle" nowrap style="text-align: center; font-size: small;">
+                <td colspan="4" align="center" valign="middle" nowrap style="text-align: center; font-size: 14px;">
                     生产令/批次号
                 </td>
-                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: small;">
+                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: 14px;">
                     材料名称或牌号
                 </td>
-                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: small;">材料规格
+                <td colspan="3" align="center" valign="middle" nowrap style="text-align: center; font-size: 14px;">材料规格
                 </td>
             </tr>
             <tr>
-                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: small;"><s:property
+                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;"><s:property
                         value="%{drawingName}"/></td>
-                <td colspan="4" align="center" valign="middle" style="text-align: center; font-size: small;"><s:property
+                <td colspan="4" align="center" valign="middle" style="text-align: center; font-size: 14px;"><s:property
                         value="%{taskId}"/></td>
-                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: small;">&nbsp;</td>
-                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: small;">&nbsp;</td>
+                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;">&nbsp;</td>
+                <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;">&nbsp;</td>
             </tr>
             <tr>
                 <td height="12" colspan="13" align="center" valign="middle"
@@ -102,24 +102,24 @@
             </tr>
             </s:if>
             <tr>
-                <td colspan="3" align="center" valign="middle" style="font-size: small">工序</td>
-                <td rowspan="3" align="center" valign="middle" style="font-size: small">操作者<br/>签字</td>
-                <td colspan="5" align="center" valign="middle" style="font-size: small">专检/终检结果</td>
-                <td colspan="2" rowspan="3" align="center" valign="middle" nowrap style="font-size: small">&nbsp;&nbsp;&nbsp;&nbsp;备&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td colspan="2" rowspan="3" align="center" valign="middle" style="font-size: small">工序二维码</td>
+                <td colspan="3" align="center" valign="middle" style="font-size: 14px">工序</td>
+                <td rowspan="3" align="center" valign="middle" style="font-size: 14px">操作者<br/>签字</td>
+                <td colspan="5" align="center" valign="middle" style="font-size: 14px">专检/终检结果</td>
+                <td colspan="2" rowspan="3" align="center" valign="middle" nowrap style="font-size: 14px">&nbsp;&nbsp;&nbsp;&nbsp;备&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                <td colspan="2" rowspan="3" align="center" valign="middle" style="font-size: 14px">工序二维码</td>
             </tr>
             <tr>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">工<br/>序<br/>号</td>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">工序<br/>名称</td>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">本序<br/>定额</td>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">合格<br/>数量</td>
-                <td colspan="2" align="center" valign="middle" style="font-size: small">不合格</td>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">检验员<br/>签章</td>
-                <td rowspan="2" align="center" valign="middle" style="font-size: small">检验日期</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">工<br/>序<br/>号</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">工序<br/>名称</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">本序<br/>定额</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">合格<br/>数量</td>
+                <td colspan="2" align="center" valign="middle" style="font-size: 14px">不合格</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">检验员<br/>签章</td>
+                <td rowspan="2" align="center" valign="middle" style="font-size: 14px">检验日期</td>
             </tr>
             <tr>
-                <td align="center" valign="middle" style="text-align: center; font-size: small;">数量</td>
-                <td align="center" valign="middle" style="text-align: center; font-size: small;">不合格审<br/>
+                <td align="center" valign="middle" style="text-align: center; font-size: 14px;">数量</td>
+                <td align="center" valign="middle" style="text-align: center; font-size: 14px;">不合格审<br/>
                     理单号
                 </td>
             </tr>
