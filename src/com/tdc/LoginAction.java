@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * Created by Alvin on 2014/7/5.
  */
-public class LoginAction extends ActionSupport{
+public class LoginAction extends ActionSupport {
 
     private String username;
     private String password;
@@ -34,7 +34,7 @@ public class LoginAction extends ActionSupport{
         tx.commit();
         HibernateUtil.closeSession();
 
-        if(list.size() == 1){
+        if (list.size() == 1) {
             if (list.get(0).getPassword().equals(getPassword())) {
                 ActionContext.getContext().getSession().put("permission", list.get(0).getPermission().toString());
             }
@@ -47,19 +47,19 @@ public class LoginAction extends ActionSupport{
         return (value == null || value.length() == 0);
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getUsername() {
         return username;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

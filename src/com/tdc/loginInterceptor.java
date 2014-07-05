@@ -1,7 +1,7 @@
 package com.tdc;
 
-import com.opensymphony.xwork2.*;
 import com.opensymphony.xwork2.Action;
+import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
 
 import java.util.Map;
@@ -25,7 +25,7 @@ public class loginInterceptor implements Interceptor {
         Map session = actionInvocation.getInvocationContext().getSession();
         String permission = (String) session.get("permission");
 
-        if (permission != null){
+        if (permission != null) {
             return actionInvocation.invoke();
         }
 

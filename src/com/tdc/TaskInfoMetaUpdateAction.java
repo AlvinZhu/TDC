@@ -40,10 +40,10 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         String permission = (String) ActionContext.getContext().getSession().get("permission");
-        if (permission == null){
+        if (permission == null) {
             return ERROR;
         }
-        if ((Integer.parseInt(permission) & 4) == 0){
+        if ((Integer.parseInt(permission) & 4) == 0) {
             return ERROR;
         }
 
@@ -118,7 +118,7 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             Iterator<TaskInfoMetaEntity> iterator = resultListNew.iterator();
             List<TaskInfoMetaEntity> tmpList;
             listSet = new ArrayList<List<TaskInfoMetaEntity>>();
-            if (count > 7){
+            if (count > 7) {
                 tmpList = new ArrayList<TaskInfoMetaEntity>();
                 for (int i = 0; i < 7; i++) {
                     tmpList.add(iterator.next());

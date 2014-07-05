@@ -223,10 +223,10 @@ public class TaskInfoMetaQueryAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         String permission = (String) ActionContext.getContext().getSession().get("permission");
-        if (permission == null){
+        if (permission == null) {
             return ERROR;
         }
-        if ((Integer.parseInt(permission) & 4) == 0){
+        if ((Integer.parseInt(permission) & 4) == 0) {
             return ERROR;
         }
 

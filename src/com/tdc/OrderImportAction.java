@@ -200,10 +200,10 @@ public class OrderImportAction extends ActionSupport {
     @Override
     public String execute() throws Exception {
         String permission = (String) ActionContext.getContext().getSession().get("permission");
-        if (permission == null){
+        if (permission == null) {
             return ERROR;
         }
-        if ((Integer.parseInt(permission) & 8) == 0){
+        if ((Integer.parseInt(permission) & 8) == 0) {
             return ERROR;
         }
 

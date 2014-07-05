@@ -22,8 +22,8 @@
             <result name="login">/login.jsp</result>
         </global-results>
         <!--<action name="LoginForm"-->
-                <!--class="com.ywjava.action.LoginFormAction">-->
-            <!--<result name="success">/login.jsp</result>-->
+        <!--class="com.ywjava.action.LoginFormAction">-->
+        <!--<result name="success">/login.jsp</result>-->
         <!--</action>-->
         <action name="Login" class="com.tdc.LoginAction">
             <result name="success">/index.jsp</result>
@@ -34,6 +34,13 @@
         <action name="Logout" class="com.tdc.LogoutAction">
             <result name="success">/index.jsp</result>
             <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="User" class="com.tdc.UserAction">
+            <result name="error">/error.jsp</result>
+            <result name="insert">/UserQueryResult.jsp</result>
+            <result name="query">/UserQueryResult.jsp</result>
+            <result name="update">/UserQueryResult.jsp</result>
+            <result name="delete">/UserQueryResult.jsp</result>
         </action>
         <action name="OrderImport" class="com.tdc.OrderImportAction">
             <result name="success">/OrderImportSuccess.jsp</result>

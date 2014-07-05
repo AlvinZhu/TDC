@@ -64,10 +64,10 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
     @Override
     public String execute() throws Exception {
         String permission = (String) session.get("permission");
-        if (permission == null){
+        if (permission == null) {
             return ERROR;
         }
-        if ((Integer.parseInt(permission) & 2) == 0){
+        if ((Integer.parseInt(permission) & 2) == 0) {
             return ERROR;
         }
 

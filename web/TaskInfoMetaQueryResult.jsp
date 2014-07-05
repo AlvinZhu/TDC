@@ -14,7 +14,7 @@
 <body>
 <jsp:include page="head.jsp"/>
 <jsp:include page="TaskInfoMetaQueryBody.jsp"/>
-<table>
+<table class="table-striped">
     <tr>
         <td></td>
         <%--<td></td>--%>
