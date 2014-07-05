@@ -9,6 +9,32 @@
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.ui.theme" value="simple"/>
     <package name="tdc" extends="struts-default">
+        <interceptors>
+            <interceptor name="loginInterceptor" class="com.tdc.loginInterceptor"/>
+            <interceptor-stack name="loginStack">
+                <interceptor-ref name="defaultStack"/>
+                <interceptor-ref name="loginInterceptor"/>
+            </interceptor-stack>
+        </interceptors>
+        <default-interceptor-ref name="loginStack"/>
+        <global-results>
+            <!-- 当返回login视图名时，转入/login.jsp页面 -->
+            <result name="login">/login.jsp</result>
+        </global-results>
+        <!--<action name="LoginForm"-->
+                <!--class="com.ywjava.action.LoginFormAction">-->
+            <!--<result name="success">/login.jsp</result>-->
+        <!--</action>-->
+        <action name="Login" class="com.tdc.LoginAction">
+            <result name="success">/index.jsp</result>
+            <result name="error">/login.jsp</result>
+            <result name="input">/login.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
+        <action name="Logout" class="com.tdc.LogoutAction">
+            <result name="success">/index.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+        </action>
         <action name="OrderImport" class="com.tdc.OrderImportAction">
             <result name="success">/OrderImportSuccess.jsp</result>
             <result name="error">/error.jsp</result>
@@ -69,6 +95,7 @@
         <action name="Log" class="com.tdc.LogAction">
             <result name="error">/LogFaild.jsp</result>
             <result name="success">/LogSuccess.jsp</result>
+            <interceptor-ref name="defaultStack"/>
         </action>
     </package>
 </struts>

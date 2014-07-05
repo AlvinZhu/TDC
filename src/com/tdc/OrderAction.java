@@ -53,6 +53,14 @@ public class OrderAction extends ActionSupport implements SessionAware {
 
     @Override
     public String execute() throws Exception {
+        String permission = (String) session.get("permission");
+        if (permission == null){
+            return ERROR;
+        }
+        if ((Integer.parseInt(permission) & 8) == 0){
+            return ERROR;
+        }
+
         if (insert != null) {
             return insert();
         }
@@ -121,7 +129,10 @@ public class OrderAction extends ActionSupport implements SessionAware {
 
 
     public String query() throws Exception {
+
+        String permission = (String) session.get("permission");
         session.clear();
+        session.put("permission", permission);
         session.put("planEndTime", planEndTime);
         session.put("taskId1", taskId1);
         session.put("taskId", taskId);

@@ -5,6 +5,7 @@ import com.google.zxing.EncodeHintType;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.OrderEntity;
 import com.tdc.db.TaskInfoMetaComparator;
@@ -38,6 +39,14 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+        String permission = (String) ActionContext.getContext().getSession().get("permission");
+        if (permission == null){
+            return ERROR;
+        }
+        if ((Integer.parseInt(permission) & 4) == 0){
+            return ERROR;
+        }
+
         if (resultListNew.size() != 0) {
             Session sess = HibernateUtil.currentSession();
 

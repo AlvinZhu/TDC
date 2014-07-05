@@ -1,5 +1,6 @@
 package com.tdc;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.WorkerEntity;
 import com.tdc.xls.WorkerXlsEntity;
@@ -126,6 +127,13 @@ public class WorkerImportAction extends ActionSupport {
 
     @Override
     public String execute() throws Exception {
+        String permission = (String) ActionContext.getContext().getSession().get("permission");
+        if (permission == null){
+            return ERROR;
+        }
+        if ((Integer.parseInt(permission) & 1) == 0){
+            return ERROR;
+        }
         if (file == null) {
             return ERROR;
         }

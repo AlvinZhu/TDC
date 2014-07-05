@@ -17,16 +17,41 @@
         height: 28px;
         border: 1px #000 solid;
     }
-     P {page-break-after: always}
+
+    P {
+        page-break-after: always
+    }
 </style>
 <div id=div0>
-    <table class="stats">
+    <table class="stats" width="100%" align="center">
+        <tbody>
         <tr>
-            <td><s:a href="Order.jsp"><s:text name="index.excelImport"/></s:a></td>
-            <td><s:a href="TaskInfoMetaQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
-            <td><s:a href="TaskInfo.jsp"><s:text name="index.excelExport"/></s:a></td>
-            <td><s:a href="Worker.jsp"><s:text name="index.worker"/></s:a></td>
+            <% String permission = (String) session.getAttribute("permission");
+                int p;
+                if (permission != null) {
+                    p = Integer.parseInt(permission);
+                    if ((p & 8) != 0) { %>
+            <td nowrap><s:a href="Order.jsp"><s:text name="index.excelImport"/></s:a></td>
+            <% }
+                if ((p & 4) != 0) { %>
+            <td nowrap><s:a href="TaskInfoMetaQuery.jsp"><s:text name="index.taskInfo"/></s:a></td>
+            <% }
+                if ((p & 2) != 0) { %>
+            <td nowrap><s:a href="TaskInfo.jsp"><s:text name="index.excelExport"/></s:a></td>
+            <% }
+                if ((p & 1) != 0) { %>
+            <td nowrap><s:a href="Worker.jsp"><s:text name="index.worker"/></s:a></td>
+            <% } %>
+            <td width="100%" nowrap>&nbsp;</td>
+            <td nowrap><s:a href="Logout.action"><s:text
+                    name="index.logout"/></s:a></td>
+            <% } else { %>
+            <td width="100%" nowrap>&nbsp;</td>
+            <td nowrap><s:a href="login.jsp"><s:text
+                    name="index.login"/></s:a></td>
+            <% } %>
         </tr>
+        </tbody>
     </table>
     <hr/>
 </div>

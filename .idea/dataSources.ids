@@ -1265,6 +1265,12 @@
       <column name="work_hour" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="task_id,drawing_num,procedure_id"/>
     </table>
+    <table name="User" schema="" catalog="tdc" type="TABLE">
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="permission" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="username"/>
+    </table>
     <table name="Worker" schema="" catalog="tdc" type="TABLE">
       <column name="worker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
       <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
