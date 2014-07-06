@@ -1255,7 +1255,8 @@
       <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <column name="checker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
       <column name="check_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <primary-key name="PRIMARY" columns="task_id,drawing_num,procedure_id"/>
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="TaskInfoMeta" schema="" catalog="tdc" type="TABLE">
       <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>

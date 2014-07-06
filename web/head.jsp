@@ -34,6 +34,8 @@
 <table class="stats" width="100%" align="center">
     <tbody>
     <tr>
+        <td nowrap><s:a href="index.jsp"><s:text
+                name="index.title"/></s:a></td>
         <% String permission = (String) session.getAttribute("permission");
             int p;
             if (permission != null) {

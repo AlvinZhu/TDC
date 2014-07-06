@@ -2,11 +2,15 @@ package com.tdc;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.TaskInfoEntity;
+import com.tdc.db.TaskInfoMetaComparator;
+import com.tdc.db.TaskInfoMetaEntity;
+import com.tdc.db.WorkerEntity;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -14,10 +18,9 @@ import java.util.List;
  */
 public class LogAction extends ActionSupport {
     private String taskId;
-    private Integer drawingNum;
-    private Integer procedureId;
-    private String procedureName;
-    //private BigDecimal workHour;
+    private String drawingNum;
+    private String procedureId;
+
     private BigDecimal qualified;
     private BigDecimal unqualified;
     private String workerId;
@@ -25,6 +28,190 @@ public class LogAction extends ActionSupport {
 
     private String type;
     private String time;
+
+    private String result;
+
+    private boolean isInvalid(String value) {
+        return (value == null || value.length() == 0);
+    }
+
+    @Override
+    public String execute() throws Exception {
+
+        if (isInvalid(type)) {
+            result = ERROR;
+            return SUCCESS;
+        }
+
+        List<WorkerEntity> workerList = null;
+        List<TaskInfoMetaEntity> taskInfoList = null;
+        List<TaskInfoEntity> logList;
+
+        Session sess;
+        Transaction tx;
+
+        if (isInvalid(workerId) || isInvalid(deviceId)) {
+            result = ERROR;
+            return SUCCESS;
+        } else {
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
+            workerList = sess.createQuery("from WorkerEntity as worker where worker.workerId=:workerId")
+                    .setString("workerId", workerId)
+                    .list();
+            tx.commit();
+            HibernateUtil.closeSession();
+
+            if (workerList.size() != 1) {
+                result = ERROR;
+                return SUCCESS;
+            }
+        }
+
+        if ("checkuser".equals(type)) {
+            result = SUCCESS;
+            return SUCCESS;
+        }
+
+        if (isInvalid(taskId) || isInvalid(drawingNum) || isInvalid(procedureId)) {
+            result = ERROR;
+            return SUCCESS;
+        } else {
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
+            taskInfoList = sess.createQuery("from TaskInfoMetaEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId")
+                    .setString("taskId", taskId)
+                    .setString("drawingNum", drawingNum)
+                    .setString("procedureId", procedureId)
+                    .list();
+            tx.commit();
+            HibernateUtil.closeSession();
+
+            if (taskInfoList.size() != 1) {
+                result = ERROR;
+                return SUCCESS;
+            }
+        }
+
+        if (!workerList.get(0).getProcedureName().equals(taskInfoList.get(0).getProcedureName())) {
+            result = "nopermission";
+            return SUCCESS;
+        }
+
+
+        if ("begin".equals(type)) {
+            TaskInfoMetaEntity task = taskInfoList.get(0);
+
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
+            taskInfoList = sess.createQuery("from TaskInfoMetaEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum")
+                    .setString("taskId", taskId)
+                    .setString("drawingNum", drawingNum)
+                    .list();
+            tx.commit();
+            HibernateUtil.closeSession();
+
+            TaskInfoMetaComparator comparator = new TaskInfoMetaComparator();
+            Collections.sort(taskInfoList, comparator);
+
+            for (int i = 0; i < taskInfoList.size(); i++) {
+                if (task.getProcedureId() == taskInfoList.get(i).getProcedureId()) {
+                    if (i != 0) {
+                        Integer preProcedureId = taskInfoList.get(i - 1).getProcedureId();
+                        sess = HibernateUtil.currentSession();
+                        tx = sess.beginTransaction();
+                        logList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid")
+                                .setString("id", getTaskId())
+                                .setString("num", getDrawingNum().toString())
+                                .setString("pid", preProcedureId.toString())
+                                .list();
+                        tx.commit();
+                        HibernateUtil.closeSession();
+
+                        TaskInfoEntity log = null;
+                         if (logList.size() >= 1) {
+                            for (TaskInfoEntity aTask : logList) {
+                                if (null != aTask.getFinishTime()) {
+                                    log = aTask;
+                                    break;
+                                }
+                            }
+                            if (null == log) {
+                                result = "unready";
+                                return SUCCESS;
+                            }
+
+                        } else {
+                            result = "unready";
+                            return SUCCESS;
+                        }
+                    }
+                    break;
+                }
+            }
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
+            TaskInfoEntity log = new TaskInfoEntity();
+
+            log.setTaskId(taskId);
+            log.setDrawingNum(Integer.parseInt(drawingNum));
+            log.setProcedureId(Integer.parseInt(procedureId));
+            log.setProcedureName(task.getProcedureName());
+            log.setWorkHour(task.getWorkHour());
+            log.setWorkerId(workerId);
+            log.setDeviceId(getDeviceId());
+            log.setStartTime(Timestamp.valueOf(time));
+
+            sess.save(log);
+            tx.commit();
+            HibernateUtil.closeSession();
+        }
+        if ("end".equals(type)) {
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
+            logList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid and task.deviceId=:did and task.workerId=:wid")
+                    .setString("id", getTaskId())
+                    .setString("num", getDrawingNum().toString())
+                    .setString("pid", getProcedureId().toString())
+                    .setString("did", getDeviceId())
+                    .setString("wid", getWorkerId())
+                    .list();
+
+            TaskInfoEntity task = null;
+            if (logList.size() >= 1) {
+                for (TaskInfoEntity aTask : logList) {
+                    if (null == aTask.getFinishTime()) {
+                        task = aTask;
+                        break;
+                    }
+                }
+                if (null == task) {
+                    tx.commit();
+                    HibernateUtil.closeSession();
+                    result = "unready";
+                    return SUCCESS;
+                }
+
+            } else {
+                tx.commit();
+                HibernateUtil.closeSession();
+                result = "unready";
+                return SUCCESS;
+            }
+
+            task.setFinishTime(Timestamp.valueOf(time));
+            task.setQualified(qualified);
+            task.setUnqualified(unqualified);
+
+            sess.flush();
+            sess.clear();
+            tx.commit();
+            HibernateUtil.closeSession();
+        }
+
+        result = SUCCESS;
+        return SUCCESS;
+    }
 
     public String getTaskId() {
         return taskId;
@@ -34,20 +221,20 @@ public class LogAction extends ActionSupport {
         this.taskId = taskId;
     }
 
-    public Integer getProcedureId() {
+    public String getDrawingNum() {
+        return drawingNum;
+    }
+
+    public void setDrawingNum(String drawingNum) {
+        this.drawingNum = drawingNum;
+    }
+
+    public String getProcedureId() {
         return procedureId;
     }
 
-    public void setProcedureId(Integer procedureId) {
+    public void setProcedureId(String procedureId) {
         this.procedureId = procedureId;
-    }
-
-    public String getProcedureName() {
-        return procedureName;
-    }
-
-    public void setProcedureName(String procedureName) {
-        this.procedureName = procedureName;
     }
 
     public BigDecimal getQualified() {
@@ -66,12 +253,12 @@ public class LogAction extends ActionSupport {
         this.unqualified = unqualified;
     }
 
-    public Integer getDrawingNum() {
-        return drawingNum;
+    public String getWorkerId() {
+        return workerId;
     }
 
-    public void setDrawingNum(Integer drawingNum) {
-        this.drawingNum = drawingNum;
+    public void setWorkerId(String workerId) {
+        this.workerId = workerId;
     }
 
     public String getType() {
@@ -90,12 +277,12 @@ public class LogAction extends ActionSupport {
         this.time = time;
     }
 
-    public String getWorkerId() {
-        return workerId;
+    public String getResult() {
+        return result;
     }
 
-    public void setWorkerId(String workerId) {
-        this.workerId = workerId;
+    public void setResult(String result) {
+        this.result = result;
     }
 
     public String getDeviceId() {
@@ -105,81 +292,4 @@ public class LogAction extends ActionSupport {
     public void setDeviceId(String deviceId) {
         this.deviceId = deviceId;
     }
-
-    @Override
-    public String execute() throws Exception {
-
-        if (null == taskId || null == drawingNum || null == procedureId || null == procedureName || null == deviceId || null == workerId) {
-            return ERROR;
-        }
-
-        Session sess = HibernateUtil.currentSession();
-        Transaction tx = sess.beginTransaction();
-        if (null != type) {
-            if (type.equals("begin")) {
-                TaskInfoEntity log = new TaskInfoEntity();
-
-                log.setTaskId(taskId);
-                log.setDrawingNum(drawingNum);
-                log.setProcedureId(procedureId);
-                log.setProcedureName(procedureName);
-                //log.setQualified(qualified);
-                //log.setUnqualified(unqualified);
-                log.setWorkerId(workerId);
-                log.setDeviceId(deviceId);
-                log.setStartTime(Timestamp.valueOf(time));
-
-                sess.save(log);
-            } else if (type.equals("end")) {
-                if (qualified.doubleValue() == 0 && unqualified.doubleValue() == 0) {
-                    return ERROR;
-                }
-                List<TaskInfoEntity> taskList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid and task.deviceId=:did and task.workerId=:wid")
-                        .setString("id", getTaskId())
-                        .setString("num", getDrawingNum().toString())
-                        .setString("pid", getProcedureId().toString())
-                        .setString("did", getDeviceId())
-                        .setString("wid", getWorkerId())
-                        .list();
-
-                TaskInfoEntity task = null;
-                if (taskList.size() == 1) {
-                    task = taskList.get(0);
-
-                } else if (taskList.size() > 1) {
-                    for (TaskInfoEntity aTask : taskList) {
-                        if (null == aTask.getFinishTime()) {
-                            task = taskList.get(0);
-                            break;
-                        }
-                    }
-                    if (null == task) {
-                        tx.commit();
-                        HibernateUtil.closeSession();
-                        return ERROR;
-                    }
-
-                } else {
-                    tx.commit();
-                    HibernateUtil.closeSession();
-                    return ERROR;
-                }
-
-                task.setFinishTime(Timestamp.valueOf(time));
-                task.setQualified(qualified);
-                task.setUnqualified(unqualified);
-
-                sess.flush();
-                sess.clear();
-            } else {
-                tx.commit();
-                HibernateUtil.closeSession();
-                return ERROR;
-            }
-        }
-        tx.commit();
-        HibernateUtil.closeSession();
-        return SUCCESS;
-    }
-
 }

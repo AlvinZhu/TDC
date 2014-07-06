@@ -66,7 +66,7 @@
             <tbody>
             <tr>
                 <td colspan="11" rowspan="2" align="center" valign="middle" nowrap
-                    style="text-align: center; font-size: 32px; font-weight: 700;"><img src="logo.png" width="103"
+                    style="text-align: center; font-size: 32px; font-weight: 700;"><img src="res/logo.png" width="103"
                                                                                              height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产&nbsp;品&nbsp;质&nbsp;量&nbsp;跟&nbsp;踪&nbsp;卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <td align="center" valign="middle" nowrap style="font-size: 14px">制单日期</td>
@@ -102,11 +102,11 @@
             </tr>
             </s:if>
             <tr>
+                <td colspan="2" rowspan="3" align="center" valign="middle" style="font-size: 14px">工序二维码</td>
                 <td colspan="3" align="center" valign="middle" style="font-size: 14px">工序</td>
                 <td rowspan="3" align="center" valign="middle" style="font-size: 14px">操作者<br/>签字</td>
                 <td colspan="5" align="center" valign="middle" style="font-size: 14px">专检/终检结果</td>
                 <td colspan="2" rowspan="3" align="center" valign="middle" nowrap style="font-size: 14px">&nbsp;&nbsp;&nbsp;&nbsp;备&nbsp;&nbsp;注&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                <td colspan="2" rowspan="3" align="center" valign="middle" style="font-size: 14px">工序二维码</td>
             </tr>
             <tr>
                 <td rowspan="2" align="center" valign="middle" style="font-size: 14px">工<br/>序<br/>号</td>
@@ -126,6 +126,16 @@
             <s:iterator value="#list" id="p2" status="st2">
                 <tr>
                     <s:if test='%{#p2.procedureId!=0}'>
+                        <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
+                                style="height:100px;width:100px"
+                                src="<s:url value="TdcOut.action?taskId=%{#p2.taskId}&drawingNum=%{#p2.drawingNum}&procedureId=%{#p2.procedureId}"/>"/></td>
+                    </s:if>
+                    <s:else>
+                        <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
+                                style="height:100px;width:100px" src=""/>
+                        </td>
+                    </s:else>
+                    <s:if test='%{#p2.procedureId!=0}'>
                         <td height="120" align="center" valign="middle" style="text-align: center"><s:property
                                 value="#p2.procedureId"/></td>
                     </s:if>
@@ -143,16 +153,6 @@
                     <td height="120" align="center" valign="middle" style="text-align: center">&nbsp;</td>
                     <td height="120" align="center" valign="middle" style="text-align: center">&nbsp;</td>
                     <td height="120" colspan="2" align="center" valign="middle" style="text-align: center">&nbsp;</td>
-                    <s:if test='%{#p2.procedureId!=0}'>
-                        <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
-                                style="height:100px;width:100px"
-                                src="<s:url value="TdcOut.action?procedureId=%{#p2.procedureId}"/>"/></td>
-                    </s:if>
-                    <s:else>
-                        <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
-                                style="height:100px;width:100px" src=""/>
-                        </td>
-                    </s:else>
                 </tr>
             </s:iterator>
             </tbody>
@@ -161,7 +161,7 @@
             </P>
         </s:if>
     </s:iterator>
-    <h1 style="text-align: center"><img src="logo.png" width="103" height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原材料（领）备料单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <h1 style="text-align: center"><img src="res/logo.png" width="103" height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原材料（领）备料单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </h1>
     <table width="720" border="2" align="center" cellspacing="0">
         <caption style="text-align: center; width: 720px; height: 20px;">
@@ -238,13 +238,13 @@
         </tbody>
     </table>
 </div>
-<div id=div1 align="center">
-    <OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height=0 id=wb name=wb width=0>
-    </OBJECT>
-    <input type=button value=页面设置 onClick=document.all.wb.ExecWB(8,1)>
-    <input type=button value=打印预览 onclick="printView()"/>
-    <input type=button value=打印 onclick=print("2")>
-    <input type=button value=关闭 onClick=document.all.wb.ExecWB(45,1)>
-</div>
+<%--<div id=div1 align="center">--%>
+    <%--<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height=0 id=wb name=wb width=0>--%>
+    <%--</OBJECT>--%>
+    <%--<input type=button value=页面设置 onClick=document.all.wb.ExecWB(8,1)>--%>
+    <%--<input type=button value=打印预览 onclick="printView()"/>--%>
+    <%--<input type=button value=打印 onclick=print("2")>--%>
+    <%--<input type=button value=关闭 onClick=document.all.wb.ExecWB(45,1)>--%>
+<%--</div>--%>
 </body>
 </html>

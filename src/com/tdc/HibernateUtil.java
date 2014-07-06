@@ -4,6 +4,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.service.ServiceRegistry;
+import org.hibernate.service.ServiceRegistryBuilder;
 
 /**
  * Created by Alvin on 2014/6/18.
@@ -14,10 +16,12 @@ public class HibernateUtil {
     static {
         try {
             //采用默认的hibernate.cfg.xml来启动一个Configuration的实例
-            Configuration configuration = new Configuration()
-                    .configure();
+            Configuration configuration = new Configuration();
+            configuration.configure();
             //由Configuration的实例来创建一个SessionFactory实例
-            sessionFactory = configuration.buildSessionFactory();
+            ServiceRegistry serviceRegistry = new ServiceRegistryBuilder().applySettings(configuration.getProperties())
+                    .buildServiceRegistry();
+            sessionFactory = configuration.buildSessionFactory(serviceRegistry);
         } catch (Throwable ex) {
             System.err.println("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);

@@ -441,7 +441,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
             }
         }
 
-        File file = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "export.xls");
+        File file = new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), "order.xls");
         OutputStream out = new FileOutputStream(file);
         hssfWorkbook.write(out);
         out.close();

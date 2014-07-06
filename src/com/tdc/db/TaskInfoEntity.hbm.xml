@@ -1,21 +1,22 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="com.tdc.db.TaskInfoEntity" table="TaskInfo" schema="" catalog="tdc">
-        <composite-id mapped="true" class="com.tdc.db.TaskInfoEntityPK">
-            <key-property name="taskId">
-                <column name="task_id" sql-type="varchar" length="30" not-null="true"/>
-            </key-property>
-            <key-property name="drawingNum">
-                <column name="drawing_num" sql-type="int" not-null="true"/>
-            </key-property>
-            <key-property name="procedureId">
-                <column name="procedure_id" sql-type="int" not-null="true"/>
-            </key-property>
-        </composite-id>
+        <id name="id">
+            <column name="id" sql-type="int" not-null="true"/>
+        </id>
+        <property name="taskId">
+            <column name="task_id" sql-type="varchar" length="30" not-null="true"/>
+        </property>
+        <property name="drawingNum">
+            <column name="drawing_num" sql-type="int" not-null="true"/>
+        </property>
+        <property name="procedureId">
+            <column name="procedure_id" sql-type="int" not-null="true"/>
+        </property>
         <property name="procedureName">
             <column name="procedure_name" sql-type="varchar" length="20"/>
         </property>

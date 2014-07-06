@@ -14,5 +14,7 @@
 <body>
 <jsp:include page="head.jsp"/>
 <s:text name="index.welcome"/>
+<br/>
+<s:a href="res/client.apk"><s:text name="apk.download"/></s:a>
 </body>
 </html>

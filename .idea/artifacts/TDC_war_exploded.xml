@@ -15,6 +15,7 @@
           <element id="library" level="project" name="org.apache.poi:poi:3.10-FINAL" />
         </element>
       </element>
+      <element id="directory" name="pic" />
     </root>
   </artifact>
 </component>

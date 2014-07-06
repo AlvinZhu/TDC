@@ -12,6 +12,8 @@ import java.io.InputStream;
  */
 public class TdcOutAction extends ActionSupport {
     private String fileName;
+    private String taskId;
+    private String drawingNum;
     private String procedureId;
     private InputStream fileInputStream;
 
@@ -40,8 +42,24 @@ public class TdcOutAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        fileName = "tdc" + procedureId + ".jpg";
-        fileInputStream = new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath(File.separator), fileName));
+        fileName = "tdc" + getTaskId() + "_"+ getDrawingNum() + "_"+ getProcedureId() + ".jpg";
+        fileInputStream = new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), fileName));
         return SUCCESS;
+    }
+
+    public String getTaskId() {
+        return taskId;
+    }
+
+    public void setTaskId(String taskId) {
+        this.taskId = taskId;
+    }
+
+    public String getDrawingNum() {
+        return drawingNum;
+    }
+
+    public void setDrawingNum(String drawingNum) {
+        this.drawingNum = drawingNum;
     }
 }

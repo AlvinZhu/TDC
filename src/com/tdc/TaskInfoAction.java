@@ -3,6 +3,7 @@ package com.tdc;
 import com.opensymphony.xwork2.ActionSupport;
 import com.tdc.db.OrderEntity;
 import com.tdc.db.TaskInfoEntity;
+import com.tdc.db.WorkerEntity;
 import org.apache.poi.hssf.usermodel.HSSFRichTextString;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -61,6 +62,54 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 
     private List<TaskInfoEntity> list;
 
+//    private String genWorkerId(){
+//        String id = "";
+//
+//        Session sess = HibernateUtil.currentSession();
+//        Transaction tx = sess.beginTransaction();
+//        List<WorkerEntity> workerList = sess.createQuery("from WorkerEntity as worker where worker.workerId=:workerId")
+//                .setString("workerId", workerId)
+//                .list();
+//        tx.commit();
+//        HibernateUtil.closeSession();
+//
+//        if (workerList.size() == 1){
+//            id = workerId;
+//        }
+//
+//        sess = HibernateUtil.currentSession();
+//        tx = sess.beginTransaction();
+//        workerList = sess.createQuery("from WorkerEntity as worker where worker.workerName=:workerName")
+//                .setString("workerName", workerId)
+//                .list();
+//        tx.commit();
+//        HibernateUtil.closeSession();
+//
+//        if (workerList.size() == 1){
+//            id = workerList.get(0).getWorkerId();
+//        }
+//
+//        return id;
+//    }
+
+    private String genWorkerName(String id){
+        String name = "";
+
+        Session sess = HibernateUtil.currentSession();
+        Transaction tx = sess.beginTransaction();
+        List<WorkerEntity> workerList = sess.createQuery("from WorkerEntity as worker where worker.workerId=:workerId")
+                .setString("workerId", id)
+                .list();
+        tx.commit();
+        HibernateUtil.closeSession();
+
+        if (workerList.size() == 1){
+            name = workerList.get(0).getWorkerName();
+        }
+
+        return name;
+    }
+
     @Override
     public String execute() throws Exception {
         String permission = (String) session.get("permission");
@@ -96,6 +145,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
     }
 
     public String insert() throws Exception {
+
         if (!taskId.equals("") && !drawingNum.equals("") && !procedureId.equals("")) {
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();
@@ -457,8 +507,8 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         if (!finishTime.equals("")) {
             query.setString("finishTime", "%" + finishTime + "%");
         }
-        if (!workerId.equals("")) {
-            query.setString("workerId", "%" + workerId + "%");
+        if (!getWorkerId().equals("")) {
+            query.setString("workerId", "%" + getWorkerId() + "%");
         }
         if (!deviceId.equals("")) {
             query.setString("deviceId", "%" + deviceId + "%");
@@ -524,8 +574,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         HSSFRow.createCell(32).setCellValue(new HSSFRichTextString("检验员"));
         HSSFRow.createCell(33).setCellValue(new HSSFRichTextString("检验时间"));
 
-        Session sess = HibernateUtil.currentSession();
-        Transaction tx = sess.beginTransaction();
+
 
         List<OrderEntity> orderEntityList;
         OrderEntity order = null;
@@ -538,11 +587,16 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                     || !order.getTaskId().equals(task.getTaskId())
                     || order.getDrawingNum() != task.getDrawingNum()
                     || order.getProcedureId() != task.getProcedureId()) {
+                Session sess = HibernateUtil.currentSession();
+                Transaction tx = sess.beginTransaction();
                 orderEntityList = sess.createQuery("from OrderEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId ")
                         .setString("taskId", task.getTaskId())
                         .setString("drawingNum", String.valueOf(task.getDrawingNum()))
                         .setString("procedureId", String.valueOf(task.getProcedureId()))
                         .list();
+
+                tx.commit();
+                HibernateUtil.closeSession();
                 order = orderEntityList.get(0);
             }
 
@@ -639,7 +693,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                 HSSFRow.createCell(29).setCellValue(task.getFinishTime().toString());
             }
             if (task.getWorkerId() != null) {
-                HSSFRow.createCell(30).setCellValue(task.getWorkerId());
+                HSSFRow.createCell(30).setCellValue(genWorkerName(task.getWorkerId()));
             }
             if (task.getDeviceId() != null) {
                 HSSFRow.createCell(31).setCellValue(task.getDeviceId());
@@ -653,10 +707,8 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 
         }
 
-        tx.commit();
-        HibernateUtil.closeSession();
 
-        File file = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "export.xls");
+        File file = new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), "log.xls");
         OutputStream out = new FileOutputStream(file);
         hssfWorkbook.write(out);
         out.close();
@@ -665,6 +717,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
     }
 
     public String update() throws Exception {
+
         if (!taskId.equals("") && !drawingNum.equals("") && !procedureId.equals("")) {
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();

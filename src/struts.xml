@@ -58,7 +58,7 @@
             <result name="success" type="stream">
                 <param name="contentType">application/vnd.ms-excel</param>
                 <param name="inputName">fileInputStream</param>
-                <param name="contentDisposition">attachment;filename=export.xls</param>
+                <param name="contentDisposition">attachment;filename=${fileName}</param>
                 <param name="bufferSize">1024</param>
             </result>
         </action>
@@ -100,8 +100,7 @@
             <result name="delete">/WorkerQueryResult.jsp</result>
         </action>
         <action name="Log" class="com.tdc.LogAction">
-            <result name="error">/LogFaild.jsp</result>
-            <result name="success">/LogSuccess.jsp</result>
+            <result name="success">/LogResult.jsp</result>
             <interceptor-ref name="defaultStack"/>
         </action>
     </package>

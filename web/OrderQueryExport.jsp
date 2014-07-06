@@ -14,6 +14,6 @@
 <body>
 <jsp:include page="head.jsp"/>
 <jsp:include page="OrderBody.jsp"/>
-<s:a href="XlsOut.action"><s:text name="export.download"/></s:a>
+<s:a href="XlsOut.action?fileName=order.xls"><s:text name="export.download"/></s:a>
 </body>
 </html>

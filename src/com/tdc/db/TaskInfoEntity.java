@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- * Created by Alvin on 2014/7/3.
+ * Created by Alvin on 2014/7/6.
  */
 public class TaskInfoEntity {
     private String taskId;
@@ -21,6 +21,7 @@ public class TaskInfoEntity {
     private String deviceId;
     private String checkerId;
     private Timestamp checkTime;
+    private int id;
 
     public String getTaskId() {
         return taskId;
@@ -134,6 +135,14 @@ public class TaskInfoEntity {
         this.checkTime = checkTime;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -142,6 +151,7 @@ public class TaskInfoEntity {
         TaskInfoEntity that = (TaskInfoEntity) o;
 
         if (drawingNum != that.drawingNum) return false;
+        if (id != that.id) return false;
         if (procedureId != that.procedureId) return false;
         if (checkTime != null ? !checkTime.equals(that.checkTime) : that.checkTime != null) return false;
         if (checkerId != null ? !checkerId.equals(that.checkerId) : that.checkerId != null) return false;
@@ -176,6 +186,7 @@ public class TaskInfoEntity {
         result = 31 * result + (deviceId != null ? deviceId.hashCode() : 0);
         result = 31 * result + (checkerId != null ? checkerId.hashCode() : 0);
         result = 31 * result + (checkTime != null ? checkTime.hashCode() : 0);
+        result = 31 * result + id;
         return result;
     }
 }

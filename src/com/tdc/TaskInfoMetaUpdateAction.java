@@ -109,7 +109,7 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
                 hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
                 BitMatrix bitMatrix = null;
                 bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 100, 100, hints);
-                Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator), "tdc" + aResultListNew.getProcedureId() + ".jpg").toPath();
+                Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), "tdc" + aResultListNew.getTaskId() + "_"+ aResultListNew.getDrawingNum() + "_"+ aResultListNew.getProcedureId() + ".jpg").toPath();
                 MatrixToImageWriter.writeToPath(bitMatrix, "jpg", path);
                 //System.out.println(path);
             }
