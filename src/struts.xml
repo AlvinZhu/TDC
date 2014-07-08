@@ -8,6 +8,7 @@
     <constant name="struts.custom.i18n.resources" value="mess"/>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
     <constant name="struts.ui.theme" value="simple"/>
+    <constant name="struts.multipart.maxSize" value="20971520"/>
     <package name="tdc" extends="struts-default">
         <interceptors>
             <interceptor name="loginInterceptor" class="com.tdc.loginInterceptor"/>

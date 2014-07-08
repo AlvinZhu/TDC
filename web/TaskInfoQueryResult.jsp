@@ -55,7 +55,7 @@
                     <%--<td><s:textfield name="epiboleEndTime" value="%{getText('global.date',{#pl.epiboleEndTime})}"/></td>--%>
                 <td><s:textfield name="qualified" value="%{#pl.qualified}"/></td>
                 <td><s:textfield name="unqualified" value="%{#pl.unqualified}"/></td>
-                <%--<td><s:textfield name="status" value="%{#pl.status}"/></td>--%>
+                    <%--<td><s:textfield name="status" value="%{#pl.status}"/></td>--%>
                 <td><s:textfield name="startTime" value="%{getText('global.datetime',{#pl.startTime})}"/></td>
                 <td><s:textfield name="finishTime" value="%{getText('global.datetime',{#pl.finishTime})}"/></td>
                 <td><s:textfield name="workerId" value="%{#pl.workerId}"/></td>

@@ -67,7 +67,7 @@
             <tr>
                 <td colspan="11" rowspan="2" align="center" valign="middle" nowrap
                     style="text-align: center; font-size: 32px; font-weight: 700;"><img src="res/logo.png" width="103"
-                                                                                             height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产&nbsp;品&nbsp;质&nbsp;量&nbsp;跟&nbsp;踪&nbsp;卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                        height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;产&nbsp;品&nbsp;质&nbsp;量&nbsp;跟&nbsp;踪&nbsp;卡&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </td>
                 <td align="center" valign="middle" nowrap style="font-size: 14px">制单日期</td>
                 <td align="center" valign="middle" nowrap style="font-size: 14px">计划数量</td>
@@ -92,7 +92,8 @@
                 <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;"><s:property
                         value="%{drawingName}"/></td>
                 <td colspan="4" align="center" valign="middle" style="text-align: center; font-size: 14px;"><s:property
-                        value="%{taskId}"/></td>
+                        value="%{taskId}"/>-<s:property
+                        value="%{drawingNum}"/></td>
                 <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;">&nbsp;</td>
                 <td colspan="3" align="center" valign="middle" style="text-align: center; font-size: 14px;">&nbsp;</td>
             </tr>
@@ -128,7 +129,8 @@
                     <s:if test='%{#p2.procedureId!=0}'>
                         <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
                                 style="height:100px;width:100px"
-                                src="<s:url value="TdcOut.action?taskId=%{#p2.taskId}&drawingNum=%{#p2.drawingNum}&procedureId=%{#p2.procedureId}"/>"/></td>
+                                src="<s:url value="TdcOut.action?taskId=%{#p2.taskId}&drawingNum=%{#p2.drawingNum}&procedureId=%{#p2.procedureId}"/>"/>
+                        </td>
                     </s:if>
                     <s:else>
                         <td height="120" colspan="2" align="center" valign="middle" style="text-align: center"><img
@@ -178,7 +180,8 @@
             <td width="80" height="40" colspan="1" align="center" valign="middle" style="text-align: center">生产令号</td>
             <td width="240" height="40" colspan="3" align="center" valign="middle" style="text-align: center">
                 <s:property
-                        value="%{taskId}"/></td>
+                        value="%{taskId}"/>-<s:property
+                    value="%{drawingNum}"/></td>
             <td width="80" height="40" colspan="1" align="center" valign="middle" style="text-align: center">产品名称</td>
             <td width="160" height="40" colspan="2" align="center" valign="middle" style="text-align: center">
                 <s:property
@@ -239,12 +242,12 @@
     </table>
 </div>
 <%--<div id=div1 align="center">--%>
-    <%--<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height=0 id=wb name=wb width=0>--%>
-    <%--</OBJECT>--%>
-    <%--<input type=button value=页面设置 onClick=document.all.wb.ExecWB(8,1)>--%>
-    <%--<input type=button value=打印预览 onclick="printView()"/>--%>
-    <%--<input type=button value=打印 onclick=print("2")>--%>
-    <%--<input type=button value=关闭 onClick=document.all.wb.ExecWB(45,1)>--%>
+<%--<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height=0 id=wb name=wb width=0>--%>
+<%--</OBJECT>--%>
+<%--<input type=button value=页面设置 onClick=document.all.wb.ExecWB(8,1)>--%>
+<%--<input type=button value=打印预览 onclick="printView()"/>--%>
+<%--<input type=button value=打印 onclick=print("2")>--%>
+<%--<input type=button value=关闭 onClick=document.all.wb.ExecWB(45,1)>--%>
 <%--</div>--%>
 </body>
 </html>

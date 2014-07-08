@@ -28,7 +28,7 @@
     </tr>
     <s:iterator value="list" id="pl" status="st">
         <s:form action="User">
-            <s:hidden name="oldUsername" value="%{#pl.oldUsername}"/>
+            <s:hidden name="oldUsername" value="%{#pl.username}"/>
             <tr>
                 <td><s:submit key="result.update" name="update"/></td>
                 <td><s:submit key="result.delete" name="delete"/></td>

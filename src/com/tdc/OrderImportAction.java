@@ -221,20 +221,30 @@ public class OrderImportAction extends ActionSupport {
                 order.setAnnualPlan(aList.getAnnualPlan());
                 order.setMonthlyPlan(aList.getMonthlyPlan());
                 order.setPlansetTags(aList.getPlansetTags());
-                order.setPlanEndTime(Date.valueOf(aList.getPlanEndTime()));
+                if (!"".equals(aList.getPlanEndTime())) {
+                    order.setPlanEndTime(Date.valueOf(aList.getPlanEndTime()));
+                }
                 order.setTrialEndTime(aList.getTrialEndTime());
                 order.setTaskId1(aList.getTaskId1());
                 order.setTaskId2(aList.getTaskId2());
                 order.setTaskId(aList.getTaskId());
-                order.setDrawingNum(Float.valueOf(aList.getDrawingNum()).intValue());
+                if (!"".equals(aList.getDrawingNum())) {
+                    order.setDrawingNum(Float.valueOf(aList.getDrawingNum()).intValue());
+                }
                 order.setDrawingName(aList.getDrawingName());
                 order.setDrawingId(aList.getDrawingId());
-                order.setNum(Float.valueOf(aList.getNum()).intValue());
-                order.setProcedureId(Float.valueOf(aList.getProcedureId()).intValue());
+                if (!"".equals(aList.getNum())) {
+                    order.setNum(Float.valueOf(aList.getNum()).intValue());
+                }
+                if (!"".equals(aList.getProcedureId())) {
+                    order.setProcedureId(Float.valueOf(aList.getProcedureId()).intValue());
+                }
                 order.setProcedureName(aList.getProcedureName());
-                order.setWorkHour(BigDecimal.valueOf(Float.valueOf(aList.getWorkHour())));
+                if (!"".equals(aList.getWorkHour())) {
+                    order.setWorkHour(BigDecimal.valueOf(Float.valueOf(aList.getWorkHour())));
+                }
                 order.setTaskTime(aList.getTaskTime());
-                if (!aList.getReceiveTime().equals("")) {
+                if (!"".equals(aList.getReceiveTime())) {
                     order.setReceiveTime(Timestamp.valueOf(aList.getReceiveTime()));
                 }
                 order.setEpiboleStatus(aList.getEpiboleStatus());
@@ -242,7 +252,9 @@ public class OrderImportAction extends ActionSupport {
                 order.setEpiboleFactory(aList.getEpiboleFactory());
                 order.setTaskType(aList.getTaskType());
                 order.setApplicant(aList.getApplicant());
-                order.setEpiboleEndTime(Date.valueOf(aList.getEpiboleEndTime()));
+                if (!"".equals(aList.getEpiboleEndTime())) {
+                    order.setEpiboleEndTime(Date.valueOf(aList.getEpiboleEndTime()));
+                }
                 order.setPlanType(aList.getPlanType());
 
                 session.saveOrUpdate(order);

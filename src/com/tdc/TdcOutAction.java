@@ -42,7 +42,7 @@ public class TdcOutAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        fileName = "tdc" + getTaskId() + "_"+ getDrawingNum() + "_"+ getProcedureId() + ".jpg";
+        fileName = "tdc" + getTaskId() + "_" + getDrawingNum() + "_" + getProcedureId() + ".jpg";
         fileInputStream = new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), fileName));
         return SUCCESS;
     }

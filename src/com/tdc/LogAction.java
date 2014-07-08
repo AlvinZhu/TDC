@@ -129,7 +129,7 @@ public class LogAction extends ActionSupport {
                         HibernateUtil.closeSession();
 
                         TaskInfoEntity log = null;
-                         if (logList.size() >= 1) {
+                        if (logList.size() >= 1) {
                             for (TaskInfoEntity aTask : logList) {
                                 if (null != aTask.getFinishTime()) {
                                     log = aTask;
@@ -177,22 +177,18 @@ public class LogAction extends ActionSupport {
                     .setString("wid", getWorkerId())
                     .list();
 
+
             TaskInfoEntity task = null;
-            if (logList.size() >= 1) {
+            if (logList.size() != 0) {
                 for (TaskInfoEntity aTask : logList) {
                     if (null == aTask.getFinishTime()) {
                         task = aTask;
                         break;
                     }
                 }
-                if (null == task) {
-                    tx.commit();
-                    HibernateUtil.closeSession();
-                    result = "unready";
-                    return SUCCESS;
-                }
+            }
 
-            } else {
+            if (null == task) {
                 tx.commit();
                 HibernateUtil.closeSession();
                 result = "unready";
@@ -202,6 +198,8 @@ public class LogAction extends ActionSupport {
             task.setFinishTime(Timestamp.valueOf(time));
             task.setQualified(qualified);
             task.setUnqualified(unqualified);
+
+//            tx.begin();
 
             sess.flush();
             sess.clear();

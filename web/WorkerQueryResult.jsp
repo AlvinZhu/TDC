@@ -30,7 +30,7 @@
                 <td><s:submit key="result.update" name="update"/></td>
                 <td><s:submit key="result.delete" name="delete"/></td>
                 <td><s:textfield name="workerId" value="%{#pl.workerId}"/></td>
-                <%--<td><s:textfield name="deviceId" value="%{#pl.deviceId}"/></td>--%>
+                    <%--<td><s:textfield name="deviceId" value="%{#pl.deviceId}"/></td>--%>
                 <td><s:textfield name="procedureName" value="%{#pl.procedureName}"/></td>
                 <td><s:textfield name="workerName" value="%{#pl.workerName}"/></td>
             </tr>

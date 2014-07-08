@@ -31,7 +31,7 @@ public class XlsOutAction extends ActionSupport {
     }
 
     public String execute() throws Exception {
-        if (fileName == null || "".equals(fileName)){
+        if (fileName == null || "".equals(fileName)) {
             fileName = "export.xls";
         }
         fileInputStream = new FileInputStream(new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), fileName));

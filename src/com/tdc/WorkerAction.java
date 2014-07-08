@@ -76,16 +76,20 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         if (!workerId.equals("")) {
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();
+            List list1 = sess.createQuery("from WorkerEntity as worker where worker.workerId=:workerId")
+                    .setString("workerId", workerId)
+                    .list();
 
-            WorkerEntity worker = new WorkerEntity();
+            if (list1.size() == 0) {
+                WorkerEntity worker = new WorkerEntity();
 
-            worker.setWorkerId(getWorkerId());
-            worker.setWorkerName(getWorkerName());
+                worker.setWorkerId(getWorkerId());
+                worker.setWorkerName(getWorkerName());
 //            worker.setDeviceId(getDeviceId());
-            worker.setProcedureName(getProcedureName());
+                worker.setProcedureName(getProcedureName());
 
-            sess.saveOrUpdate(worker);
-
+                sess.save(worker);
+            }
             transaction.commit();
             HibernateUtil.closeSession();
         }

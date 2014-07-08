@@ -41,9 +41,9 @@
     <orderEntry type="library" name="Hibernate 4.2.2-4.2.2" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 7.0.54" level="application_server_libraries" />
     <orderEntry type="library" name="Struts 2-2.3.16.3" level="project" />
-    <orderEntry type="library" name="mysql-connector-java-5.1.29-bin" level="project" />
     <orderEntry type="library" name="com.google.zxing:zxingorg:3.1.0" level="project" />
     <orderEntry type="library" name="org.apache.poi:poi:3.10-FINAL" level="project" />
+    <orderEntry type="library" name="mysql:mysql-connector-java:5.1.31" level="project" />
   </component>
 </module>
 

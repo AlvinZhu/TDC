@@ -64,24 +64,30 @@ public class UserAction extends ActionSupport implements SessionAware {
 
     public String insert() throws Exception {
 //        if (!password.equals(password2) || "".equals(password)){
-        if ("".equals(password)) {
+
+        if ("".equals(password) || "".equals(username)) {
             return ERROR;
         }
-        if (!"".equals(username)) {
-            Session sess = HibernateUtil.currentSession();
-            Transaction transaction = sess.beginTransaction();
 
+        Session sess = HibernateUtil.currentSession();
+        Transaction transaction = sess.beginTransaction();
+
+        List list1= sess.createQuery("from UserEntity as user where user.username=:username")
+                .setString("username",username)
+                .list();
+
+        if(list1.size() == 0) {
             UserEntity user = new UserEntity();
 
             user.setUsername(getUsername());
             user.setPassword(getPassword());
             user.setPermission(genPermission());
 
-            sess.saveOrUpdate(user);
-
-            transaction.commit();
-            HibernateUtil.closeSession();
+            sess.save(user);
         }
+        transaction.commit();
+        HibernateUtil.closeSession();
+
 
         query();
         return "insert";
@@ -146,7 +152,9 @@ public class UserAction extends ActionSupport implements SessionAware {
     }
 
     public String update() throws Exception {
-        if (!"".equals(username)) {
+        if ("".equals(username) || "".equals(password)) {
+            return ERROR;
+        }
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();
 
@@ -164,7 +172,7 @@ public class UserAction extends ActionSupport implements SessionAware {
 
             transaction.commit();
             HibernateUtil.closeSession();
-        }
+
 
         username = (String) session.get("username");
         permission1 = Boolean.valueOf((String) session.get("permission1"));
@@ -178,6 +186,7 @@ public class UserAction extends ActionSupport implements SessionAware {
     }
 
     public String delete() throws Exception {
+
         Session sess = HibernateUtil.currentSession();
         Transaction tx = sess.beginTransaction();
 

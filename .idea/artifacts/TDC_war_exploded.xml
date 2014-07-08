@@ -10,9 +10,9 @@
         <element id="directory" name="lib">
           <element id="library" level="project" name="Hibernate 4.2.2-4.2.2" />
           <element id="library" level="project" name="Struts 2-2.3.16.3" />
-          <element id="library" level="project" name="mysql-connector-java-5.1.29-bin" />
           <element id="library" level="project" name="com.google.zxing:zxingorg:3.1.0" />
           <element id="library" level="project" name="org.apache.poi:poi:3.10-FINAL" />
+          <element id="library" level="project" name="mysql:mysql-connector-java:5.1.31" />
         </element>
       </element>
       <element id="directory" name="pic" />

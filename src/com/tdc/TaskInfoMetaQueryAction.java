@@ -397,8 +397,14 @@ public class TaskInfoMetaQueryAction extends ActionSupport {
             }
             resultListOld = query.list();
 
+            tx.commit();
+            HibernateUtil.closeSession();
+
             this.taskId = resultListOld.get(0).getTaskId();
             this.drawingNum = Integer.toString(resultListOld.get(0).getDrawingNum());
+
+            sess = HibernateUtil.currentSession();
+            tx = sess.beginTransaction();
 
             setResultListNew(sess.createQuery("from TaskInfoMetaEntity as task where task.taskId=:id and task.drawingNum=:num")
                     .setString("id", getTaskId())

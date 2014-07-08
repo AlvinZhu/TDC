@@ -1213,70 +1213,70 @@
       <column name="NAME" sqlType="VARCHAR" precision="128" scale="0" nullable="false" jdbcType="12"/>
     </table>
     <table name="Order" schema="" catalog="tdc" type="TABLE">
-      <column name="process_region" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="annual_plan" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="monthly_plan" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="planset_tags" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="process_region" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="annual_plan" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="monthly_plan" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="planset_tags" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="plan_end_time" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <column name="trial_end_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="task_id1" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="task_id2" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="task_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
+      <column name="trial_end_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="task_id1" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="task_id2" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="task_id" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="drawing_num" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="drawing_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="drawing_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="drawing_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="drawing_id" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="num" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="procedure_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="procedure_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="procedure_name" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="work_hour" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
-      <column name="task_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="task_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="receive_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="epibole_status" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="epibole_check_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="epibole_factory" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="task_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
-      <column name="applicant" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="epibole_status" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="epibole_check_time" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="epibole_factory" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="task_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="applicant" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="epibole_end_time" sqlType="DATE" precision="10" scale="0" nullable="true" jdbcType="91"/>
-      <column name="plan_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="plan_type" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <primary-key name="PRIMARY" columns="task_id,drawing_num,procedure_id"/>
     </table>
     <table name="TaskInfo" schema="" catalog="tdc" type="TABLE">
-      <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="drawing_num" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="procedure_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="work_hour" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
       <column name="qualified" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
       <column name="unqualified" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
       <column name="status" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <column name="start_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="finish_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
-      <column name="worker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
-      <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
-      <column name="checker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
+      <column name="worker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="checker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="check_time" sqlType="DATETIME" precision="19" scale="0" nullable="true" jdbcType="93"/>
       <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <primary-key name="PRIMARY" columns="id"/>
     </table>
     <table name="TaskInfoMeta" schema="" catalog="tdc" type="TABLE">
-      <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="task_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
       <column name="drawing_num" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="procedure_id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
-      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="work_hour" sqlType="DECIMAL" precision="10" scale="1" nullable="true" jdbcType="3"/>
       <primary-key name="PRIMARY" columns="task_id,drawing_num,procedure_id"/>
     </table>
     <table name="User" schema="" catalog="tdc" type="TABLE">
-      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12"/>
-      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12"/>
+      <column name="username" sqlType="VARCHAR" precision="255" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="password" sqlType="VARCHAR" precision="255" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <column name="permission" sqlType="INT" precision="10" scale="0" nullable="true" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="username"/>
     </table>
     <table name="Worker" schema="" catalog="tdc" type="TABLE">
-      <column name="worker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
-      <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12"/>
-      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
-      <column name="worker_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12"/>
+      <column name="worker_id" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12" def="Jyc="/>
+      <column name="device_id" sqlType="VARCHAR" precision="30" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="procedure_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
+      <column name="worker_name" sqlType="VARCHAR" precision="20" scale="0" nullable="true" jdbcType="12" def="Jyc="/>
       <primary-key name="PRIMARY" columns="worker_id"/>
     </table>
   </data-source>

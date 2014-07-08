@@ -49,8 +49,8 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 
         if (resultListNew.size() != 0) {
             Session sess = HibernateUtil.currentSession();
-
             Transaction tx = sess.beginTransaction();
+
 
             List<OrderEntity> list = sess.createQuery("from OrderEntity as order where order.taskId=:taskId and order.drawingNum=:drawingNum")
                     .setString("taskId", taskId)
@@ -61,8 +61,8 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
                     .setString("id", getTaskId())
                     .setString("num", getDrawingNum())
                     .executeUpdate();
-            tx.commit();
 
+            tx.commit();
             HibernateUtil.closeSession();
 
 
@@ -94,12 +94,13 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
             for (TaskInfoMetaEntity aResultListNew : resultListNew) {
                 sess = HibernateUtil.currentSession();
                 tx = sess.beginTransaction();
+
                 aResultListNew.setTaskId(getTaskId());
                 aResultListNew.setDrawingNum(Integer.parseInt(getDrawingNum()));
 
                 sess.save(aResultListNew);
-                tx.commit();
 
+                tx.commit();
                 HibernateUtil.closeSession();
 
                 String content = getTaskId() + "_" + getDrawingNum() + "_" + aResultListNew.getProcedureId() + "_" + aResultListNew.getProcedureName();
@@ -109,7 +110,7 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
                 hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
                 BitMatrix bitMatrix = null;
                 bitMatrix = multiFormatWriter.encode(content, BarcodeFormat.QR_CODE, 100, 100, hints);
-                Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), "tdc" + aResultListNew.getTaskId() + "_"+ aResultListNew.getDrawingNum() + "_"+ aResultListNew.getProcedureId() + ".jpg").toPath();
+                Path path = new File(ServletActionContext.getServletContext().getRealPath(File.separator + "res"), "tdc" + aResultListNew.getTaskId() + "_" + aResultListNew.getDrawingNum() + "_" + aResultListNew.getProcedureId() + ".jpg").toPath();
                 MatrixToImageWriter.writeToPath(bitMatrix, "jpg", path);
                 //System.out.println(path);
             }

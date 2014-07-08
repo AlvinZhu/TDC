@@ -89,36 +89,42 @@ public class OrderAction extends ActionSupport implements SessionAware {
         if (!taskId.equals("") && !drawingNum.equals("") && !procedureId.equals("")) {
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();
+            List list1 = sess.createQuery("from OrderEntity as order where order.taskId=:taskId and order.drawingNum=:drawingNum and order.procedureId=:procedureId")
+                    .setString("taskId", taskId)
+                    .setString("drawingNum", drawingNum)
+                    .setString("procedureId", procedureId)
+                    .list();
 
-            OrderEntity order = new OrderEntity();
+            if (list1.size() == 0) {
+                OrderEntity order = new OrderEntity();
 
-            if (!getPlanEndTime().equals("")) {
-                order.setPlanEndTime(Date.valueOf(getPlanEndTime()));
-            }
-            order.setTaskId1(getTaskId1());
-            order.setTaskId(getTaskId());
-            if (!getDrawingNum().equals("")) {
-                order.setDrawingNum(Integer.parseInt(getDrawingNum()));
-            }
-            order.setDrawingName(getDrawingName());
-            order.setDrawingId(getDrawingId());
-            if (!getNum().equals("")) {
-                order.setNum(Integer.parseInt(getNum()));
-            }
-            if (getProcedureId() != "") {
-                order.setProcedureId(Integer.parseInt(getProcedureId()));
-            }
-            order.setProcedureName(getProcedureName());
-            order.setWorkHour(getWorkHour());
-            if (!getReceiveTime().equals("")) {
-                order.setReceiveTime(Timestamp.valueOf(getReceiveTime()));
-            }
-            if (!getEpiboleEndTime().equals("")) {
-                order.setEpiboleEndTime(Date.valueOf(getEpiboleEndTime()));
-            }
+                if (!getPlanEndTime().equals("")) {
+                    order.setPlanEndTime(Date.valueOf(getPlanEndTime()));
+                }
+                order.setTaskId1(getTaskId1());
+                order.setTaskId(getTaskId());
+                if (!getDrawingNum().equals("")) {
+                    order.setDrawingNum(Integer.parseInt(getDrawingNum()));
+                }
+                order.setDrawingName(getDrawingName());
+                order.setDrawingId(getDrawingId());
+                if (!getNum().equals("")) {
+                    order.setNum(Integer.parseInt(getNum()));
+                }
+                if (getProcedureId() != "") {
+                    order.setProcedureId(Integer.parseInt(getProcedureId()));
+                }
+                order.setProcedureName(getProcedureName());
+                order.setWorkHour(getWorkHour());
+                if (!getReceiveTime().equals("")) {
+                    order.setReceiveTime(Timestamp.valueOf(getReceiveTime()));
+                }
+                if (!getEpiboleEndTime().equals("")) {
+                    order.setEpiboleEndTime(Date.valueOf(getEpiboleEndTime()));
+                }
 
-            sess.saveOrUpdate(order);
-
+                sess.save(order);
+            }
             transaction.commit();
             HibernateUtil.closeSession();
         }
@@ -375,7 +381,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
             if (order.getPlansetTags() != null) {
                 HSSFRow.createCell(3).setCellValue(order.getPlansetTags());
             }
-            if (order.getPlanEndTime().toString() != null) {
+            if (order.getPlanEndTime() != null) {
                 HSSFRow.createCell(4).setCellValue(order.getPlanEndTime().toString());
             }
             if (order.getTrialEndTime() != null) {

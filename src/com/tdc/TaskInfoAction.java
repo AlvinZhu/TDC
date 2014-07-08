@@ -92,7 +92,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 //        return id;
 //    }
 
-    private String genWorkerName(String id){
+    private String genWorkerName(String id) {
         String name = "";
 
         Session sess = HibernateUtil.currentSession();
@@ -103,7 +103,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         tx.commit();
         HibernateUtil.closeSession();
 
-        if (workerList.size() == 1){
+        if (workerList.size() == 1) {
             name = workerList.get(0).getWorkerName();
         }
 
@@ -194,7 +194,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                 task.setCheckTime(Timestamp.valueOf(getCheckTime()));
             }
 
-            sess.saveOrUpdate(task);
+            sess.save(task);
 
             transaction.commit();
             HibernateUtil.closeSession();
@@ -573,7 +573,6 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         HSSFRow.createCell(31).setCellValue(new HSSFRichTextString("设备编号"));
         HSSFRow.createCell(32).setCellValue(new HSSFRichTextString("检验员"));
         HSSFRow.createCell(33).setCellValue(new HSSFRichTextString("检验时间"));
-
 
 
         List<OrderEntity> orderEntityList;
