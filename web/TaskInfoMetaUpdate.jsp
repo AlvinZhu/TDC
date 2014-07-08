@@ -69,11 +69,12 @@
                     <td><s:textfield name="resultListNew[%{#st.index}].procedureId" value="%{#p2.procedureId}"/></td>
                     <td><s:textfield name="resultListNew[%{#st.index}].procedureName"
                                      value="%{#p2.procedureName}"/></td>
-                    <td><s:textfield name="resultListNew[%{#st.index}].workHour" value="%{#p2.workHour}"/></td>
+                    <td><s:textfield name="resultListNew[%{#st.index}].workHour" value="%{#p2.workHour}" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
                 </tr>
             </s:iterator>
         </table>
         <s:submit key="query.update"/>
+        <s:checkbox name="printAll"/><s:text name="print.all"/>
     </s:form>
 </div>
 </body>

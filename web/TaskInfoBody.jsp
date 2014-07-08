@@ -25,11 +25,11 @@
         </tr>
         <tr>
             <td><s:text name="insert.workHour"/></td>
-            <td><s:textfield name="workHour"/></td>
+            <td><s:textfield name="workHour" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
             <td><s:text name="insert.qualified"/></td>
-            <td><s:textfield name="qualified"/></td>
+            <td><s:textfield name="qualified" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
             <td><s:text name="insert.unqualified"/></td>
-            <td><s:textfield name="unqualified"/></td>
+            <td><s:textfield name="unqualified" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
             <td><s:text name="insert.status"/></td>
             <td><s:textfield name="status"/></td>
                 <%--<td><s:text name="insert.drawingName"/></td>--%>

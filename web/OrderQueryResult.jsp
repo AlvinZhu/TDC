@@ -48,7 +48,7 @@
                 <td><s:textfield name="num" value="%{#pl.num}"/></td>
                 <td><s:textfield name="procedureId" value="%{#pl.procedureId}"/></td>
                 <td><s:textfield name="procedureName" value="%{#pl.procedureName}"/></td>
-                <td><s:textfield name="workHour" value="%{#pl.workHour}"/></td>
+                <td><s:textfield name="workHour" value="%{#pl.workHour}" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
                 <td><s:textfield name="receiveTime" value="%{getText('global.datetime',{#pl.receiveTime})}"/></td>
                 <td><s:textfield name="epiboleEndTime" value="%{getText('global.date',{#pl.epiboleEndTime})}"/></td>
             </tr>

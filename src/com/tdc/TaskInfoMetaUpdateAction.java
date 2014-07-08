@@ -33,6 +33,7 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
     private String drawingId;
     private Integer num;
     private String date;
+    private Boolean printAll;
 
     public TaskInfoMetaUpdateAction() {
     }
@@ -234,5 +235,13 @@ public class TaskInfoMetaUpdateAction extends ActionSupport {
 
     public void setListSize(int listSize) {
         this.listSize = listSize;
+    }
+
+    public void setPrintAll(Boolean printAll) {
+        this.printAll = printAll;
+    }
+
+    public Boolean getPrintAll() {
+        return printAll;
     }
 }

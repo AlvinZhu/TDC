@@ -21,6 +21,7 @@
         <global-results>
             <!-- 当返回login视图名时，转入/login.jsp页面 -->
             <result name="login">/login.jsp</result>
+            <result name="failed">/failed.jsp</result>
         </global-results>
         <!--<action name="LoginForm"-->
         <!--class="com.ywjava.action.LoginFormAction">-->

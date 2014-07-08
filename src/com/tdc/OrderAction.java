@@ -115,6 +115,7 @@ public class OrderAction extends ActionSupport implements SessionAware {
                     order.setProcedureId(Integer.parseInt(getProcedureId()));
                 }
                 order.setProcedureName(getProcedureName());
+
                 order.setWorkHour(getWorkHour());
                 if (!getReceiveTime().equals("")) {
                     order.setReceiveTime(Timestamp.valueOf(getReceiveTime()));

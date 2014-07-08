@@ -50,11 +50,11 @@
                     <%--<td><s:textfield name="num" value="%{#pl.num}"/></td>--%>
                 <td><s:textfield name="procedureId" value="%{#pl.procedureId}"/></td>
                 <td><s:textfield name="procedureName" value="%{#pl.procedureName}"/></td>
-                <td><s:textfield name="workHour" value="%{#pl.workHour}"/></td>
+                <td><s:textfield name="workHour" value="%{#pl.workHour}" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
                     <%--<td><s:textfield name="receiveTime" value="%{getText('global.datetime',{#pl.receiveTime})}"/></td>--%>
                     <%--<td><s:textfield name="epiboleEndTime" value="%{getText('global.date',{#pl.epiboleEndTime})}"/></td>--%>
-                <td><s:textfield name="qualified" value="%{#pl.qualified}"/></td>
-                <td><s:textfield name="unqualified" value="%{#pl.unqualified}"/></td>
+                <td><s:textfield name="qualified" value="%{#pl.qualified}" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
+                <td><s:textfield name="unqualified" value="%{#pl.unqualified}" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
                     <%--<td><s:textfield name="status" value="%{#pl.status}"/></td>--%>
                 <td><s:textfield name="startTime" value="%{getText('global.datetime',{#pl.startTime})}"/></td>
                 <td><s:textfield name="finishTime" value="%{getText('global.datetime',{#pl.finishTime})}"/></td>

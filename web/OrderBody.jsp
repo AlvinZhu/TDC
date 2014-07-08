@@ -40,7 +40,7 @@
             <td><s:text name="insert.procedureName"/></td>
             <td><s:textfield name="procedureName"/></td>
             <td><s:text name="insert.workHour"/></td>
-            <td><s:textfield name="workHour"/></td>
+            <td><s:textfield name="workHour" onKeyPress='if(isNaN(this.value))this.value=""'/></td>
             <td><s:text name="insert.receiveTime"/></td>
             <td><s:textfield name="receiveTime"/></td>
             <td><s:text name="insert.epiboleEndTime"/></td>

@@ -163,6 +163,8 @@
             </P>
         </s:if>
     </s:iterator>
+    <s:if test='%{printAll==true}'>
+    <P>
     <h1 style="text-align: center"><img src="res/logo.png" width="103" height="34" alt=""/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;原材料（领）备料单&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </h1>
     <table width="720" border="2" align="center" cellspacing="0">
@@ -240,6 +242,8 @@
         </tr>
         </tbody>
     </table>
+        </P>
+    </s:if>
 </div>
 <%--<div id=div1 align="center">--%>
 <%--<OBJECT classid="CLSID:8856F961-340A-11D0-A96B-00C04FD705A2" height=0 id=wb name=wb width=0>--%>
