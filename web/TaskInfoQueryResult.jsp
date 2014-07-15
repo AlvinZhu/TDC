@@ -35,6 +35,7 @@
     </tr>
     <s:iterator value="list" id="pl" status="st">
         <s:form action="TaskInfo">
+            <s:hidden name="id" value="%{#pl.id}"/>
             <s:hidden name="oldTaskId" value="%{#pl.taskId}"/>
             <s:hidden name="oldDrawingNum" value="%{#pl.drawingNum}"/>
             <s:hidden name="oldProcedureId" value="%{#pl.procedureId}"/>

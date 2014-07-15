@@ -37,6 +37,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
     private String oldTaskId;
     private String oldDrawingNum;
     private String oldProcedureId;
+    private int id;
 
     //    private String planEndTime;
 //    private String taskId1;
@@ -178,9 +179,9 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 //            }
             task.setQualified(getQualified());
             task.setUnqualified(getUnqualified());
-            if (!getStatus().equals("")) {
-                task.setStatus(Integer.valueOf(getStatus()));
-            }
+//            if (!"".equals(getStatus())) {
+//                task.setStatus(Integer.valueOf(getStatus()));
+//            }
             if (!getStartTime().equals("")) {
                 task.setStartTime(Timestamp.valueOf(getStartTime()));
             }
@@ -721,10 +722,12 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
             Session sess = HibernateUtil.currentSession();
             Transaction transaction = sess.beginTransaction();
 
-            int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId")
-                    .setString("taskId", oldTaskId)
-                    .setString("drawingNum", oldDrawingNum)
-                    .setString("procedureId", oldProcedureId)
+            int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.id=:id")
+//        int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId")
+//                .setString("taskId", getTaskId())
+//                .setString("drawingNum", getDrawingNum())
+//                .setString("procedureId", getProcedureId())
+                    .setString("id", String.valueOf(getId()))
                     .executeUpdate();
 
             TaskInfoEntity task = new TaskInfoEntity();
@@ -755,9 +758,9 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 //            }
             task.setQualified(getQualified());
             task.setUnqualified(getUnqualified());
-            if (!getStatus().equals("")) {
-                task.setStatus(Integer.valueOf(getStatus()));
-            }
+//            if (!"".equals(getStatus())) {
+//                task.setStatus(Integer.valueOf(getStatus()));
+//            }
             if (!getStartTime().equals("")) {
                 task.setStartTime(Timestamp.valueOf(getStartTime()));
             }
@@ -771,7 +774,7 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
                 task.setCheckTime(Timestamp.valueOf(getCheckTime()));
             }
 
-            sess.saveOrUpdate(task);
+            sess.save(task);
 
             transaction.commit();
             HibernateUtil.closeSession();
@@ -825,10 +828,12 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
         Session sess = HibernateUtil.currentSession();
         Transaction tx = sess.beginTransaction();
 
-        int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId")
-                .setString("taskId", getTaskId())
-                .setString("drawingNum", getDrawingNum())
-                .setString("procedureId", getProcedureId())
+        int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.id=:id")
+//        int deletedEntities = sess.createQuery("delete from TaskInfoEntity as task where task.taskId=:taskId and task.drawingNum=:drawingNum and task.procedureId=:procedureId")
+//                .setString("taskId", getTaskId())
+//                .setString("drawingNum", getDrawingNum())
+//                .setString("procedureId", getProcedureId())
+                .setString("id", String.valueOf(getId()))
                 .executeUpdate();
 
         tx.commit();
@@ -1121,5 +1126,13 @@ public class TaskInfoAction extends ActionSupport implements SessionAware {
 
     public void setCheckTime(String checkTime) {
         this.checkTime = checkTime;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

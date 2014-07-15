@@ -110,8 +110,8 @@ public class WorkerImportAction extends ActionSupport {
                 }
                 workerXlsEntity.setWorkerId(getValue(hssfCell));
 
-//                hssfCell = hssfRow.getCell(1);
-//                workerXlsEntity.setDeviceId(getValue(hssfCell));
+                hssfCell = hssfRow.getCell(1);
+                workerXlsEntity.setDeviceId(getValue(hssfCell));
 
                 hssfCell = hssfRow.getCell(2);
                 workerXlsEntity.setProcedureName(getValue(hssfCell));
@@ -145,7 +145,7 @@ public class WorkerImportAction extends ActionSupport {
                 WorkerEntity worker = new WorkerEntity();
 
                 worker.setWorkerId(aList.getWorkerId());
-//                worker.setDeviceId(aList.getDeviceId());
+                worker.setDeviceId(aList.getDeviceId());
                 worker.setProcedureName(aList.getProcedureName());
                 worker.setWorkerName(aList.getWorkerName());
 

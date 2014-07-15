@@ -24,7 +24,7 @@ public class LogAction extends ActionSupport {
     private BigDecimal qualified;
     private BigDecimal unqualified;
     private String workerId;
-    private String deviceId;
+//    private String deviceId;
 
     private String type;
     private String time;
@@ -50,7 +50,8 @@ public class LogAction extends ActionSupport {
         Session sess;
         Transaction tx;
 
-        if (isInvalid(workerId) || isInvalid(deviceId)) {
+//        if (isInvalid(workerId) || isInvalid(deviceId)) {
+        if (isInvalid(workerId)) {
             result = ERROR;
             return SUCCESS;
         } else {
@@ -159,7 +160,8 @@ public class LogAction extends ActionSupport {
             log.setProcedureName(task.getProcedureName());
             log.setWorkHour(task.getWorkHour());
             log.setWorkerId(workerId);
-            log.setDeviceId(getDeviceId());
+//            log.setDeviceId(getDeviceId());
+            log.setDeviceId(workerList.get(0).getDeviceId());
             log.setStartTime(Timestamp.valueOf(time));
 
             sess.save(log);
@@ -169,11 +171,13 @@ public class LogAction extends ActionSupport {
         if ("end".equals(type)) {
             sess = HibernateUtil.currentSession();
             tx = sess.beginTransaction();
-            logList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid and task.deviceId=:did and task.workerId=:wid")
+            logList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid and task.workerId=:wid")
+//            logList = sess.createQuery("from TaskInfoEntity as task where task.taskId=:id and task.drawingNum=:num and task.procedureId=:pid and task.deviceId=:did and task.workerId=:wid")
                     .setString("id", getTaskId())
                     .setString("num", getDrawingNum().toString())
                     .setString("pid", getProcedureId().toString())
-                    .setString("did", getDeviceId())
+//                    .setString("did", workerList.get(0).getDeviceId())
+//                    .setString("did", getDeviceId())
                     .setString("wid", getWorkerId())
                     .list();
 
@@ -283,11 +287,11 @@ public class LogAction extends ActionSupport {
         this.result = result;
     }
 
-    public String getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
+//    public String getDeviceId() {
+//        return deviceId;
+//    }
+//
+//    public void setDeviceId(String deviceId) {
+//        this.deviceId = deviceId;
+//    }
 }

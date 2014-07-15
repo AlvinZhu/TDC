@@ -21,8 +21,8 @@
             <td><s:textfield name="workerId"/></td>
             <td><s:text name="insert.workerName"/></td>
             <td><s:textfield name="workerName"/></td>
-                <%--<td><s:text name="insert.deviceId"/></td>--%>
-                <%--<td><s:textfield name="deviceId"/></td>--%>
+                <td><s:text name="insert.deviceId"/></td>
+                <td><s:textfield name="deviceId"/></td>
             <td><s:text name="insert.procedureName"/></td>
             <td><s:textfield name="procedureName"/></td>
         </tr>

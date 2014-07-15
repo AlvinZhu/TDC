@@ -33,7 +33,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
     private String oldWorkerId;
 
     private String workerId;
-    //    private String deviceId;
+        private String deviceId;
     private String procedureName;
     private String workerName;
 
@@ -85,7 +85,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
 
                 worker.setWorkerId(getWorkerId());
                 worker.setWorkerName(getWorkerName());
-//            worker.setDeviceId(getDeviceId());
+            worker.setDeviceId(getDeviceId());
                 worker.setProcedureName(getProcedureName());
 
                 sess.save(worker);
@@ -104,7 +104,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         session.put("permission", permission);
 
         session.put("workerId", workerId);
-//        session.put("deviceId", deviceId);
+        session.put("deviceId", deviceId);
         session.put("procedureName", procedureName);
         session.put("workerName", workerName);
 
@@ -125,15 +125,15 @@ public class WorkerAction extends ActionSupport implements SessionAware {
             hql += "worker.workerId like :workerId ";
         }
 
-//        if (!deviceId.equals("")) {
-//            count++;
-//            if (count == 1) {
-//                hql += "where ";
-//            } else {
-//                hql += "and ";
-//            }
-//            hql += "worker.deviceId like :deviceId ";
-//        }
+        if (!deviceId.equals("")) {
+            count++;
+            if (count == 1) {
+                hql += "where ";
+            } else {
+                hql += "and ";
+            }
+            hql += "worker.deviceId like :deviceId ";
+        }
 
         if (!procedureName.equals("")) {
             count++;
@@ -161,9 +161,9 @@ public class WorkerAction extends ActionSupport implements SessionAware {
             query.setString("workerId", "%" + workerId + "%");
         }
 
-//        if (!deviceId.equals("")) {
-//            query.setString("deviceId", "%" + deviceId + "%");
-//        }
+        if (!deviceId.equals("")) {
+            query.setString("deviceId", "%" + deviceId + "%");
+        }
 
         if (!procedureName.equals("")) {
             query.setString("procedureName", "%" + procedureName + "%");
@@ -189,7 +189,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         HSSFRow HSSFRow = hssfSheet.createRow(0);
 
         HSSFRow.createCell(0).setCellValue(new HSSFRichTextString("员工编号"));
-//        HSSFRow.createCell(1).setCellValue(new HSSFRichTextString("设备编号"));
+        HSSFRow.createCell(1).setCellValue(new HSSFRichTextString("设备编号"));
         HSSFRow.createCell(2).setCellValue(new HSSFRichTextString("工序名称"));
         HSSFRow.createCell(3).setCellValue(new HSSFRichTextString("姓名"));
 
@@ -201,9 +201,9 @@ public class WorkerAction extends ActionSupport implements SessionAware {
                 HSSFRow.createCell(0).setCellValue(worker.getWorkerId());
             }
 
-//            if (worker.getDeviceId() != null) {
-//                HSSFRow.createCell(1).setCellValue(worker.getDeviceId());
-//            }
+            if (worker.getDeviceId() != null) {
+                HSSFRow.createCell(1).setCellValue(worker.getDeviceId());
+            }
 
             if (worker.getProcedureName() != null) {
                 HSSFRow.createCell(2).setCellValue(worker.getProcedureName());
@@ -235,7 +235,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
 
             worker.setWorkerId(getWorkerId());
             worker.setWorkerName(getWorkerName());
-//            worker.setDeviceId(getDeviceId());
+            worker.setDeviceId(getDeviceId());
             worker.setProcedureName(getProcedureName());
 
             sess.saveOrUpdate(worker);
@@ -245,7 +245,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         }
 
         workerId = (String) session.get("workerId");
-//        deviceId = (String) session.get("deviceId");
+        deviceId = (String) session.get("deviceId");
         procedureName = (String) session.get("procedureName");
         workerName = (String) session.get("workerName");
 
@@ -265,7 +265,7 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         HibernateUtil.closeSession();
 
         workerId = (String) session.get("workerId");
-//        deviceId = (String) session.get("deviceId");
+        deviceId = (String) session.get("deviceId");
         procedureName = (String) session.get("procedureName");
         workerName = (String) session.get("workerName");
 
@@ -338,13 +338,13 @@ public class WorkerAction extends ActionSupport implements SessionAware {
         this.workerId = workerId;
     }
 
-//    public String getDeviceId() {
-//        return deviceId;
-//    }
-//
-//    public void setDeviceId(String deviceId) {
-//        this.deviceId = deviceId;
-//    }
+    public String getDeviceId() {
+        return deviceId;
+    }
+
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
 
     public String getProcedureName() {
         return procedureName;
